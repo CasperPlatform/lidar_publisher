@@ -72,8 +72,8 @@ include_directories(include
 ## Declare a cpp executable
 # add_executable(lidar_scanner_driver_node src/lidar_scanner_driver_node.cpp)
 add_executable(lidar_scanner_publisher 
-	src/lidar_scanner_publisher.cpp
-	src/lidar_scanner.cpp
+	src/lidar_server_publisher.cpp
+	src/lidar_server.cpp
 )
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
