@@ -15,6 +15,10 @@ class lidarScanner;
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 
+#include <ros/ros.h>
+#include <sensor_msgs/LaserScan.h>
+#include <std_msgs/UInt16.h>
+
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -70,17 +74,21 @@ private:
     boost::asio::io_service io_service;
     std::string port;
     int baud_rate;
+    std::string port;
     char lidarStart[2];
     char lidarStop[2];
     bool polling;
     static sqlite3 *sqlite_open();  
+    int verifyToken(const char token[]) const;
 public:
     lidarserver(const std::string port, int baud_rate);
     ~lidarserver();    
-    int startPolling();    
+    int startPolling();
+    int stopPolling();    
     int parseRequest(std::array<char,20> buf, int len);
     int start();
-    int verifyToken(const char token[]) const;
+    ros::NodeHandle nh;
+    ros::NodeHandle priv_nh("~");
     
 };
 

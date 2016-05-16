@@ -46,9 +46,10 @@ public:
     
 
     void start(char *address,int port);
-    void startServer(char *address, char *port);
-    void listenForMessages();
-    void showAddress(char* address);
+    void start_receive();
+    void handle_receive(const boost::system::error_code& error,
+      std::size_t bytes_transferred);
+    
 };
 
 

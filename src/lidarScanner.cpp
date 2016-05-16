@@ -13,7 +13,9 @@ namespace lidar_scanner_driver
 		serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 	}						   
 	lidarScanner::~lidarScanner()
+	
 	void lidarScanner::poll(sensor_msgs::LaserScan::Ptr scan) {
+		
 		uint8_t points = 0;
 		bool scan_ready = false;
 		rpms = 0;
@@ -36,7 +38,7 @@ namespace lidar_scanner_driver
 		{
 			boost::asio::streambuf response;
 
-			boost::asio::read_until(serial_, response, "\r\n" );
+			boost::asio::read_until(serial, response, "\r\n" );
 
 		    std::istream response_stream(&response);
 		    response_stream >> scan_position;

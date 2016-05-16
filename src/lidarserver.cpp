@@ -14,15 +14,16 @@ lidarserver::lidarserver(const std::string port, int baud_rate){
         lidarStop[i]    = 'L';
         lidarStop[i+1]  = 's';
     }
+    ros::init(argc, argv, "lidar_scanner_publisher");
     token = "";
     this->port = port;
     this->baud_rate = baud_rate;
     this->polling = false;
     this->serialHandler = serial_handler_ptr(new serialhandler());
     this->lidarScanner  = lidar_scanner_ptr(new lidarScanner(port,
-                                                            baud_rate));
+                                                            baud_rate, 
+                                                            this->io_service));
     this->socketHandler = socket_handler_ptr(new SocketHandler(this));
-
 }
 driveserver::~driveserver(){}
 
@@ -30,20 +31,51 @@ int lidarserver::start(){
     printf("driveserver start()\n");
 
     //this->socketHandler->setServer(*this);
-    if(serialHandler->start("/dev/ttyACM0",9600) != false){
-        printf("Serial started successfully\n");
-    }
-    this->socketHandler->start("0.0.0.0",9999);
+    
+    // if(serialHandler->start("/dev/ttyACM0",9600) != false){
+    //     printf("Serial started successfully\n");
+    // }
+    
+    this->socketHandler->start("0.0.0.0",9998);
     //this->socketHandler->startServer("0.0.0.0", "9999");
     return 0;
 }
 int lidarserver::startPolling(){
     
-    if(serialHandler->write_bytes(this->lidarStart,2) == -1){
-        printf("serialwrite failed\n");
-        return -1;
+    // if(serialHandler->write_bytes(this->lidarStart,2) == -1){
+    //     printf("serialwrite failed\n");
+    //     return -1;
+    // }
+    polling = true;
+
+    ros::init(argc, argv, "lidar_scanner_publisher");
+    ROS_INFO_STREAM("Lidar Scanner Publisher");
+    this->priv_nh.param("port", this->port, this->port);
+    this->priv_nh.param("baud_rate", this->baud_rate, this->baud_rate);
+    this->priv_nh.param("frame_id", frame_id, std::string("lidar_scanner"));
+
+    ros::Publisher laser_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1000);
+    ros::Publisher motor_pub = nh.advertise<std_msgs::UInt16>("rpms",1000);
+    std_msgs::UInt16 rpms;
+    while(this->polling){
+        
+        while(ros::ok())
+        {
+            sensor_msgs::LaserScan::Ptr scan(new sensor_msgs::LaserScan);
+            scan->header.frame_id = frame_id;
+            scan->header.stamp = ros::Time::now();
+            lidarScanner->poll(scan);
+            rpms.data=laser.rpms;
+            laser_pub.publish(scan);
+            motor_pub.publish(rpms);
+        }
     }
-    
+    this->lidarScanner.close();
+    return 0;
+}
+int lidarserver::stopPolling(){
+    polling = false;
+    ros::shutdown();
 }
 int lidarserver::parseRequest(std::array<char,20> buf, int len) {
     // parse message and verify token
@@ -76,7 +108,7 @@ int lidarserver::parseRequest(std::array<char,20> buf, int len) {
     }
 
     // check if message is error free.
-    if(r && read_buf.size() == 24){
+    if(r && read_buf.size() == 21){
         printf("got a complete drive message\n");
     }
     else{
@@ -99,22 +131,28 @@ int lidarserver::parseRequest(std::array<char,20> buf, int len) {
         }
         token = std::string(tmp);
     }
-    // prepare for serial delivery
-    char fmsg[8];
-    fmsg[0] = read_buf[0];
-    for(int i = 0; i < 7; i++){
-        fmsg[i+1] = read_buf[i+17];
-    }
-    for(int i = 0; i < 8;i++){
-        printf("serial msg nr %d: %d\n",i,fmsg[i]);
-    }
-
-    if(serialHandler->write_bytes(fmsg,8) == -1){
-        printf("serialwrite failed\n");
+    char lidar = read_buf[0];
+    char start = read_buf[1];
+    if(lidar != 0x4c){
+        printf("Wring lidar flag\n");
         return -1;
     }
-    printf("successfully wrote to serial\n");
-    return 0;
+    if(start != 0x53 || start != 0x73){
+        printf("wrong start/stop flag\n");
+        return -1;
+    }
+    if(start == 0x53){
+        // we got LS, start mapping
+        return 0;
+    }
+    else if(start = 0x73){
+        // we got Ls, stop mapping
+        return 1;
+    }
+
+    // prepare for serial delivery
+    
+    return -1;
 }
 int lidarserver::verifyToken(const char token[]) const{
 
