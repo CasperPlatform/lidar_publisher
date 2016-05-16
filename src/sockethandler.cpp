@@ -10,9 +10,9 @@
 
 //sockethandler::~sockethandler(){}
 sockethandler::sockethandler(lidarserver* server, int port) :
-socket(this->io_service, udp::endpoint(udp::v4(), port ))
+socket(this->io_service, udp::endpoint(udp::v4(), port )),lidarserver(lidar_server_ptr(server))
 {
-    this->lidarserver = lidar_server_ptr(server);
+    //this->lidarserver = lidar_server_ptr(server);
 }
 sockethandler::~sockethandler(){
   this->io_service.stop();
