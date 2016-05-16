@@ -43,7 +43,7 @@ class sockethandler{
         void handle_receive(const boost::system::error_code& error,
         std::size_t bytes_transferred);
     public:
-        SocketHandler(void)
+        sockethandler(void)
         :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
         sockethandler(lidarserver* server, int port);
         ~sockethandler();
