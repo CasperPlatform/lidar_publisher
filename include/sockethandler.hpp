@@ -45,7 +45,7 @@ class sockethandler{
     public:
         // SocketHandler(void)
         // :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
-        sockethandler(lidarserver* server, int port);
+        sockethandler(lidarserver* server);
         ~sockethandler();
         void start();
         
