@@ -68,4 +68,4 @@ namespace lidar_scanner_driver
 			}
 		} 
 	}
-};
+}

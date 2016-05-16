@@ -6,7 +6,12 @@
 #include <SocketHandler.hpp>
 #include <serialhandler.hpp>
 #include <lidarScanner.hpp>
-lidarserver::lidarserver(const std::string port, int baud_rate){
+
+lidarserver::lidarserver(){}
+lidarserver::lidarserver(const std::string port,
+                         int baud_rate,
+                         int argc, 
+                         char** argv){
     read_buf.fill(0);
     for(int i = 0; i>1; i++){
         lidarStart[i]   = 'L';
@@ -16,6 +21,8 @@ lidarserver::lidarserver(const std::string port, int baud_rate){
     }
     ros::init(argc, argv, "lidar_scanner_publisher");
     token = "";
+    this->argc = argc;
+    this->argv = argv;
     this->port = port;
     this->baud_rate = baud_rate;
     this->polling = false;
@@ -48,7 +55,7 @@ int lidarserver::startPolling(){
     // }
     polling = true;
 
-    ros::init(argc, argv, "lidar_scanner_publisher");
+    ros::init(this->argc, this->argv, "lidar_scanner_publisher");
     ROS_INFO_STREAM("Lidar Scanner Publisher");
     this->priv_nh.param("port", this->port, this->port);
     this->priv_nh.param("baud_rate", this->baud_rate, this->baud_rate);

@@ -4,7 +4,7 @@
 // Standard C++ entry point
 int main(int argc, char** argv) {
 
-lidarserver lidar("/dev/ttyUSB0",115200);
+lidarserver lidar("/dev/ttyUSB0",115200, argc, argv);
 lidar.start();
  
  // Start the node resource managers (communication, time, etc)

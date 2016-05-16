@@ -74,14 +74,16 @@ private:
     boost::asio::io_service io_service;
     std::string port;
     int baud_rate;
-    std::string port;
     char lidarStart[2];
     char lidarStop[2];
     bool polling;
+    int argc;
+    char ** argv;
     static sqlite3 *sqlite_open();  
     int verifyToken(const char token[]) const;
 public:
-    lidarserver(const std::string port, int baud_rate);
+    lidarserver();
+    lidarserver(const std::string port, int baud_rate, int argc, char** argv);
     ~lidarserver();    
     int startPolling();
     int stopPolling();    
