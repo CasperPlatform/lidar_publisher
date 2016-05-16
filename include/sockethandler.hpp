@@ -32,9 +32,9 @@ using boost::asio::ip::udp;
 class sockethandler{
 
     private:
-        udp::socket socket;
-        udp::endpoint remote_endpoint;
-        boost::asio::io_service io_service;
+        //udp::socket socket;
+        //udp::endpoint remote_endpoint;
+        //boost::asio::io_service io_service;
         //boost::asio::io_service io_service;
         lidar_server_ptr lidarserver;
         std::array<char,UDP_IN_BUF> read_buf;
@@ -45,7 +45,7 @@ class sockethandler{
     public:
         // SocketHandler(void)
         // :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
-        sockethandler(lidarserver* server);
+        sockethandler(lidarserver* server, int port);
         ~sockethandler();
         void start();
         
