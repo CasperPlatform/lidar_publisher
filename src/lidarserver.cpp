@@ -11,7 +11,8 @@ lidarserver::lidarserver(){}
 lidarserver::lidarserver(const std::string port,
                          int baud_rate,
                          int argc, 
-                         char** argv){
+                         char** argv)
+{
     read_buf.fill(0);
     for(int i = 0; i>1; i++){
         lidarStart[i]   = 'L';
@@ -19,6 +20,7 @@ lidarserver::lidarserver(const std::string port,
         lidarStop[i]    = 'L';
         lidarStop[i+1]  = 's';
     }
+
     ros::init(argc, argv, "lidar_scanner_publisher");
     token = "";
     this->argc = argc;
@@ -32,7 +34,8 @@ lidarserver::lidarserver(const std::string port,
                                                             this->io_service));
     this->socketHandler = socket_handler_ptr(new SocketHandler(this,9998));
 }
-driveserver::~driveserver(){}
+
+lidarserver::~lidarserver(){}
 
 int lidarserver::start(){
     printf("driveserver start()\n");
@@ -77,7 +80,7 @@ int lidarserver::startPolling(){
             motor_pub.publish(rpms);
         }
     }
-    this->lidarScanner.close();
+    this->lidarScanner->close();
     return 0;
 }
 int lidarserver::stopPolling(){

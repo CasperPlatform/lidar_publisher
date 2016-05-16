@@ -33,7 +33,7 @@ void SocketHandler::start_receive()
         )
     );
 }
-void handle_receive(const boost::system::error_code& error,
+void SocketHandler::handle_receive(const boost::system::error_code& error,
       std::size_t bytes_transferred)
   {
     // if no error
