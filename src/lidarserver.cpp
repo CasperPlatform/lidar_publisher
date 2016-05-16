@@ -75,7 +75,7 @@ int lidarserver::startPolling(){
             scan->header.frame_id = frame_id;
             scan->header.stamp = ros::Time::now();
             lidarScanner->poll(scan);
-            rpms.data=laser.rpms;
+            rpms.data=lidarScanner->rpms;
             laser_pub.publish(scan);
             motor_pub.publish(rpms);
         }

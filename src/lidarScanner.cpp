@@ -11,7 +11,7 @@
 	{
 		serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 	}						   
-	lidarScanner::~lidarScanner()
+	lidarScanner::~lidarScanner(){}
 	
 	void lidarScanner::poll(sensor_msgs::LaserScan::Ptr scan) {
 		
