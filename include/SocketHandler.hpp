@@ -16,7 +16,10 @@ class lidarserver;
 #include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
-#include <array.h>
+#include <array>
+#include <iostream>
+#include <stdio.h>
+#include <string>
 
 #define UDP_IN_BUF 20
 //#include <driveserver.hpp>
