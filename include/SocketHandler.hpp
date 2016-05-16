@@ -41,11 +41,11 @@ private:
 public:
     SocketHandler();
     ~SocketHandler();
-    SocketHandler(lidarserver * server);
+    SocketHandler(lidarserver * server, int port);
     //int setServer(driveserver & server) const;
     
 
-    void start(char *address,int port);
+    void start();
     void start_receive();
     void handle_receive(const boost::system::error_code& error,
       std::size_t bytes_transferred);

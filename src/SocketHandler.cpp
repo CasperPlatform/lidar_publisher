@@ -9,7 +9,8 @@
 #include <lidarserver.hpp>
 SocketHandler::SocketHandler(){}
 SocketHandler::~SocketHandler(){}
-SocketHandler::SocketHandler(lidarserver * server)
+SocketHandler::SocketHandler(lidarserver * server, int port):
+socket(this->io_service, udp::endpoint(udp::v4(), port ))
 {
     this->lidarserver = lidar_server_ptr(server);
 }
@@ -18,6 +19,9 @@ SocketHandler::SocketHandler(lidarserver * server)
 //     //this->driveServer = drive_server_ptr(server);
 //     return 0;
 // }
+void SocketHandler::start(){
+    start_receive();
+}
 void SocketHandler::start_receive()
 {
     socket.async_receive_from(

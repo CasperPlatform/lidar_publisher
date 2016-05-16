@@ -30,7 +30,7 @@ lidarserver::lidarserver(const std::string port,
     this->lidarScanner  = lidar_scanner_ptr(new lidarScanner(port,
                                                             baud_rate, 
                                                             this->io_service));
-    this->socketHandler = socket_handler_ptr(new SocketHandler(this));
+    this->socketHandler = socket_handler_ptr(new SocketHandler(this,9998));
 }
 driveserver::~driveserver(){}
 
@@ -43,7 +43,7 @@ int lidarserver::start(){
     //     printf("Serial started successfully\n");
     // }
     
-    this->socketHandler->start("0.0.0.0",9998);
+    this->socketHandler->start();
     //this->socketHandler->startServer("0.0.0.0", "9999");
     return 0;
 }
