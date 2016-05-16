@@ -65,17 +65,16 @@ include_directories(include
 )
 
 ## Declare a cpp library
-# add_library(lidar_scanner_driver
-#   src/${PROJECT_NAME}/lidar_scanner_driver.cpp
-# )
+ add_library(lidar_scanner_driver
+  src/sockethandler.cpp
+  src/lidarserver.cpp
+  src/lidarScanner.cpp
+ )
 
 ## Declare a cpp executable
 # add_executable(lidar_scanner_driver_node src/lidar_scanner_driver_node.cpp)
 add_executable(lidar_scanner_publisher 
 	src/lidar_server_publisher.cpp
-  src/sockethandler.cpp
-	src/lidarserver.cpp
-  src/lidarScanner.cpp
 )
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -83,6 +82,7 @@ add_dependencies(lidar_scanner_publisher lidar_scanner_driver_generate_messages_
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(lidar_scanner_publisher
+  lidar_scanner_driver
   ${catkin_LIBRARIES}
 )
 
