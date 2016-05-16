@@ -21,9 +21,6 @@ socket(this->io_service, udp::endpoint(udp::v4(), port ))
 //     //this->driveServer = drive_server_ptr(server);
 //     return 0;
 // }
-void SocketHandler::start(){
-    start_receive();
-}
 void SocketHandler::start_receive()
 {
     socket.async_receive_from(
@@ -61,8 +58,7 @@ void handle_receive(const boost::system::error_code& error,
         printf("error in read\n");
     }
 }
-void SocketHandler::start(char * addr, int port){
-    this->socket(this->io_service, udp::endpoint(udp::v4(), port));
+void SocketHandler::start(){
     start_receive();
     this->io_service.run();
 }
