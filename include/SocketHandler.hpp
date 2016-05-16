@@ -34,8 +34,8 @@ private:
     std::array<char,UDP_IN_BUF> read_buf;
     void startreceive();
 public:
-    // SocketHandler(void)
-    // :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
+    SocketHandler(void)
+    :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
     SocketHandler(lidarserver* server, int port);
     ~SocketHandler();
     void start();
