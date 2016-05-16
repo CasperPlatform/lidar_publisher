@@ -41,7 +41,7 @@ private:
 public:
     SocketHandler();
     ~SocketHandler();
-    SocketHandler(lidarserver * server, int port);
+    SocketHandler(lidarserver* server, int port);
     //int setServer(driveserver & server) const;
     
 

@@ -7,9 +7,11 @@
 
 #include <SocketHandler.hpp>
 #include <lidarserver.hpp>
-SocketHandler::SocketHandler(){}
+SocketHandler::SocketHandler():
+socket(this->io_service,udp::endpoint(udp::v4(), 9998))
+{}
 SocketHandler::~SocketHandler(){}
-SocketHandler::SocketHandler(lidarserver * server, int port):
+SocketHandler::SocketHandler(lidarserver* server, int port):
 socket(this->io_service, udp::endpoint(udp::v4(), port ))
 {
     this->lidarserver = lidar_server_ptr(server);
