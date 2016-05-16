@@ -41,9 +41,9 @@ private:
 public:
     // SocketHandler(void)
     // :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
-
-    ~SocketHandler();
     SocketHandler(lidarserver* server, int port);
+    ~SocketHandler();
+    
     //int setServer(driveserver & server) const;
     
 

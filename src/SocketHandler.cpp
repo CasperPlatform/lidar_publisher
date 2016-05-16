@@ -8,12 +8,13 @@
 #include <SocketHandler.hpp>
 #include <lidarserver.hpp>
 
-SocketHandler::~SocketHandler(){}
+//SocketHandler::~SocketHandler(){}
 SocketHandler::SocketHandler(lidarserver* server, int port):
 socket(this->io_service, udp::endpoint(udp::v4(), port ))
 {
     this->lidarserver = lidar_server_ptr(server);
 }
+SocketHandler::~SocketHandler(){}
 
 // int SocketHandler::setServer(driveserver & server) const {
 //     //this->driveServer = drive_server_ptr(server);
