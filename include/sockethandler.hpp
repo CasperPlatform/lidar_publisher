@@ -8,7 +8,7 @@
 
 
 
-class lidarserver;
+
 #include <boost/asio.hpp>
 #include <boost/asio/serial_port.hpp>
 #include <boost/system/error_code.hpp>
@@ -20,6 +20,7 @@ class lidarserver;
 #include <iostream>
 #include <stdio.h>
 #include <string>
+#include <lidarserver.hpp>
 
 #define UDP_IN_BUF 20
 //#include <driveserver.hpp>
@@ -27,7 +28,7 @@ class lidarserver;
 
 typedef boost::shared_ptr<lidarserver> lidar_server_ptr;
 
-//using boost::asio::ip::udp;
+using boost::asio::ip::udp;
 
 class sockethandler{
 
