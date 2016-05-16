@@ -5,7 +5,7 @@
 #include <lidarserver.hpp>
 #include <SocketHandler.hpp>
 #include <serialhandler.hpp>
-#include <lidarScanner.cpp>
+#include <lidarScanner.hpp>
 lidarserver::lidarserver(const std::string port, int baud_rate){
     read_buf.fill(0);
     for(int i = 0; i>1; i++){
