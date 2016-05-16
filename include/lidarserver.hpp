@@ -79,6 +79,7 @@ private:
     bool polling;
     int argc;
     char ** argv;
+    std::string frame_id;
     static sqlite3 *sqlite_open();  
     int verifyToken(const char token[]) const;
 public:

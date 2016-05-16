@@ -33,24 +33,15 @@ private:
     lidar_server_ptr lidarserver;
     std::array<char,UDP_IN_BUF> read_buf;
     void startreceive();
-    //struct addrinfo hints, *result, *p;
-    //int status;
-    //char ipString[INET6_ADDRSTRLEN];  // will point to the results
-    //void getAddress(char* address, char* port);
-    //void *get_in_addr(struct sockaddr *sa);
 public:
     // SocketHandler(void)
     // :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
     SocketHandler(lidarserver* server, int port);
     ~SocketHandler();
-    
-    //int setServer(driveserver & server) const;
-    
-
     void start();
     void start_receive();
     void handle_receive(const boost::system::error_code& error,
-      std::size_t bytes_transferred);
+    std::size_t bytes_transferred);
     
 };
 
