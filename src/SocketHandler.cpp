@@ -27,7 +27,7 @@ void SocketHandler::start_receive()
         boost::asio::buffer(read_buf), remote_endpoint,
         boost::bind
         (
-            &lidarserver::handle_receive, this,
+            &SocketHandler::handle_receive, this,
             boost::asio::placeholders::error,
             boost::asio::placeholders::bytes_transferred
         )
