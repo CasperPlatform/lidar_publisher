@@ -24,11 +24,10 @@ lidarserver::lidarserver(const std::string port,
     token = "";
     this->argc = argc;
     this->argv = argv;
-    this->port = port;
     this->baud_rate = baud_rate;
     this->polling = false;
     this->lidarScanner  = lidar_scanner_ptr(new lidarScanner(port,
-                                                            baud_rate, 
+                                                            this->baud_rate, 
                                                             this->io_service));
     this->socketHandler = socket_handler_ptr(new SocketHandler(this,9998));
 }
