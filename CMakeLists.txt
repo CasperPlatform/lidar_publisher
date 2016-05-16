@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(lidar_scanner_driver)
-
+set(CMAKE_CXX_FLAGS "-Wall -std=c++11")
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -75,7 +75,7 @@ add_executable(lidar_scanner_publisher
 	src/lidar_server_publisher.cpp
 	src/lidarserver.cpp
   src/lidarScanner.cpp
-  src/Sockethandler.cpp
+  src/SocketHandler.cpp
 )
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
