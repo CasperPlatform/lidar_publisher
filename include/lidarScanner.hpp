@@ -11,7 +11,7 @@
 #include <boost/array.hpp>
 #include <string>
 
-namespace lidar_scanner_driver{
+
 	class lidarScanner
 	{
 	public:
@@ -26,6 +26,6 @@ namespace lidar_scanner_driver{
 	    bool                      shutting_down;
 	    boost::asio::serial_port  serial;
 	};
-}
+
 
 #endif // lidarServer.hpp

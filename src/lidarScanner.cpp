@@ -1,7 +1,6 @@
 #include <lidarScanner.hpp>
 #include <ros/console.h>
-namespace lidar_scanner_driver
-{
+
 	lidarScanner::lidarScanner(const std::string& port,
 							   uint32_t baud_rate, 
 							   boost::asio::io_service& io)
@@ -68,4 +67,3 @@ namespace lidar_scanner_driver
 			}
 		} 
 	}
-}
