@@ -73,7 +73,7 @@ include_directories(include
 # add_executable(lidar_scanner_driver_node src/lidar_scanner_driver_node.cpp)
 add_executable(lidar_scanner_publisher 
 	src/lidar_server_publisher.cpp
-  src/SocketHandler.cpp
+  src/sockethandler.cpp
 	src/lidarserver.cpp
   src/lidarScanner.cpp
 )

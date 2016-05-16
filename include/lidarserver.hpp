@@ -6,7 +6,7 @@
 #ifndef lidarserver_hpp
 #define lidarserver_hpp
 
-class SocketHandler;
+class sockethandler;
 class lidarScanner;
 #include <boost/asio.hpp>
 #include <boost/asio/serial_port.hpp>
@@ -61,7 +61,7 @@ class lidarScanner;
 
 
 
-typedef boost::shared_ptr<SocketHandler> socket_handler_ptr;
+typedef boost::shared_ptr<sockethandler> socket_handler_ptr;
 typedef boost::shared_ptr<lidarScanner>  lidar_scanner_ptr;
 class lidarserver{
 

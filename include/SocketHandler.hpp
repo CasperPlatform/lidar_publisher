@@ -29,7 +29,7 @@ typedef boost::shared_ptr<lidarserver> lidar_server_ptr;
 
 using boost::asio::ip::udp;
 
-class SocketHandler{
+class sockethandler{
 
     private:
         udp::socket socket;
@@ -45,8 +45,8 @@ class SocketHandler{
     public:
         // SocketHandler(void)
         // :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
-        SocketHandler(lidarserver* server, int port);
-        ~SocketHandler();
+        sockethandler(lidarserver* server, int port);
+        ~sockethandler();
         void start();
         
     };

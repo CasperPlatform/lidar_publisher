@@ -3,7 +3,7 @@
 *   Author @Pontus Pohl and @Linus Eiderström Swahn
 */
 #include <lidarserver.hpp>
-#include <SocketHandler.hpp>
+#include <sockethandler.hpp>
 #include <lidarScanner.hpp>
 
 lidarserver::lidarserver(){}
@@ -29,7 +29,7 @@ lidarserver::lidarserver(const std::string port,
     this->lidarScanner  = lidar_scanner_ptr(new lidarScanner(port,
                                                             this->baud_rate, 
                                                             this->io_service));
-    this->socketHandler = socket_handler_ptr(new SocketHandler(this,9998));
+    this->socketHandler = socket_handler_ptr(new sockethandler(this,9998));
 }
 
 lidarserver::~lidarserver(){}

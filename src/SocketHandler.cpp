@@ -1,40 +1,40 @@
 /**
-*	Casper SocketHandler Implementation 
+*	Casper sockethandler Implementation 
 *	Author @Pontus Pohl and @Linus Eiderström Swahn
 */
 
 
 
-#include <SocketHandler.hpp>
+#include <sockethandler.hpp>
 #include <lidarserver.hpp>
 
-//SocketHandler::~SocketHandler(){}
-SocketHandler::SocketHandler(lidarserver* server, int port) :
+//sockethandler::~sockethandler(){}
+sockethandler::sockethandler(lidarserver* server, int port) :
 socket(this->io_service, udp::endpoint(udp::v4(), port ))
 {
     this->lidarserver = lidar_server_ptr(server);
 }
-SocketHandler::~SocketHandler(){
+sockethandler::~sockethandler(){
   this->io_service.stop();
 }
 
-// int SocketHandler::setServer(driveserver & server) const {
+// int sockethandler::setServer(driveserver & server) const {
 //     //this->driveServer = drive_server_ptr(server);
 //     return 0;
 // }
-void SocketHandler::start_receive()
+void sockethandler::start_receive()
 {
     socket.async_receive_from(
         boost::asio::buffer(read_buf), remote_endpoint,
         boost::bind
         (
-            &SocketHandler::handle_receive, this,
+            &sockethandler::handle_receive, this,
             boost::asio::placeholders::error,
             boost::asio::placeholders::bytes_transferred
         )
     );
 }
-void SocketHandler::handle_receive(const boost::system::error_code& error,
+void sockethandler::handle_receive(const boost::system::error_code& error,
       std::size_t bytes_transferred)
   {
     // if no error
@@ -59,7 +59,7 @@ void SocketHandler::handle_receive(const boost::system::error_code& error,
         printf("error in read\n");
     }
 }
-void SocketHandler::start(){
+void sockethandler::start(){
     start_receive();
     this->io_service.run();
 }
