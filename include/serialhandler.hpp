@@ -39,7 +39,7 @@ protected:
 public:
 	serialhandler(void);
 	virtual ~serialhandler(void);
-
+	
 	char get_eol_char() const;
 	void set_eol_char(const char &c);
 

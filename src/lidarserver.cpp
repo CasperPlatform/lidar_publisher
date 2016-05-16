@@ -4,7 +4,6 @@
 */
 #include <lidarserver.hpp>
 #include <SocketHandler.hpp>
-#include <serialhandler.hpp>
 #include <lidarScanner.hpp>
 
 lidarserver::lidarserver(){}
@@ -28,7 +27,6 @@ lidarserver::lidarserver(const std::string port,
     this->port = port;
     this->baud_rate = baud_rate;
     this->polling = false;
-    this->serialHandler = serial_handler_ptr(new serialhandler());
     this->lidarScanner  = lidar_scanner_ptr(new lidarScanner(port,
                                                             baud_rate, 
                                                             this->io_service));

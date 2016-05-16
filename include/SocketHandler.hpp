@@ -38,7 +38,7 @@ class SocketHandler {
         //boost::asio::io_service io_service;
         lidar_server_ptr lidarserver;
         std::array<char,UDP_IN_BUF> read_buf;
-        void start();
+        
         void start_receive();
         void handle_receive(const boost::system::error_code& error,
         std::size_t bytes_transferred);
@@ -47,6 +47,7 @@ class SocketHandler {
         // :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
         SocketHandler(lidarserver* server, int port);
         ~SocketHandler();
+        void start();
         
     };
 

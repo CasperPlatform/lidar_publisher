@@ -12,8 +12,8 @@
 #include <string>
 
 
-	class lidarScanner
-	{
+class lidarScanner
+{
 	public:
 		uint16_t rpms;
 		lidarScanner(const std::string& port, uint32_t baud_rate, boost::asio::io_service& io);
@@ -25,7 +25,7 @@
 	    uint32_t                  baud_rate;
 	    bool                      shutting_down;
 	    boost::asio::serial_port  serial;
-	};
+};
 
 
-#endif // lidarServer.hpp
+#endif // lidarScanner.hpp

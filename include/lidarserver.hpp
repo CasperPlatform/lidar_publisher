@@ -5,13 +5,14 @@
 
 #ifndef lidarserver_hpp
 #define lidarserver_hpp
+
 class SocketHandler;
-class serialhandler;
 class lidarScanner;
 #include <boost/asio.hpp>
 #include <boost/asio/serial_port.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 
@@ -61,12 +62,11 @@ class lidarScanner;
 
 
 typedef boost::shared_ptr<SocketHandler> socket_handler_ptr;
-typedef boost::shared_ptr<serialhandler> serial_handler_ptr;
 typedef boost::shared_ptr<lidarScanner>  lidar_scanner_ptr;
 class lidarserver{
 
 private:    
-    serial_handler_ptr serialHandler;
+    //serial_handler_ptr serialHandler;
     socket_handler_ptr socketHandler;
     lidar_scanner_ptr  lidarScanner;     
     std::array<char,READ_BUF> read_buf;
@@ -90,6 +90,7 @@ public:
     int stopPolling();    
     int parseRequest(std::array<char,20> buf, int len);
     int start();
+    
     
     
 };
