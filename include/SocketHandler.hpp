@@ -39,8 +39,9 @@ private:
     //void getAddress(char* address, char* port);
     //void *get_in_addr(struct sockaddr *sa);
 public:
-    SocketHandler()
-    :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
+    // SocketHandler(void)
+    // :socket(this->io_service,udp::endpoint(udp::v4(), 9998)){}
+
     ~SocketHandler();
     SocketHandler(lidarserver* server, int port);
     //int setServer(driveserver & server) const;

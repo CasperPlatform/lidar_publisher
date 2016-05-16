@@ -33,7 +33,7 @@
 		int scan_time_ms;
 		char dummy;
 
-		while (!shutting_down_ && !scan_ready) 
+		while (!this->shutting_down && !scan_ready) 
 		{
 			boost::asio::streambuf response;
 

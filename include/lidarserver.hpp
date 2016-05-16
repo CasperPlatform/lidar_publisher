@@ -82,15 +82,14 @@ private:
     static sqlite3 *sqlite_open();  
     int verifyToken(const char token[]) const;
 public:
-    lidarserver();
+    lidarserver(void);
     lidarserver(const std::string port, int baud_rate, int argc, char** argv);
     ~lidarserver();    
     int startPolling();
     int stopPolling();    
     int parseRequest(std::array<char,20> buf, int len);
     int start();
-    ros::NodeHandle nh;
-    ros::NodeHandle priv_nh("~");
+    
     
 };
 
