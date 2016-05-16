@@ -18,11 +18,6 @@ SocketHandler::SocketHandler(lidarserver * server)
 //     //this->driveServer = drive_server_ptr(server);
 //     return 0;
 // }
-void SocketHandler::start(char * addr, int port){
-    this->socket(this->io_service, udp::endpoint(udp::v4(), port));
-    start_receive();
-    this->io_service.run();
-}
 void SocketHandler::start_receive()
 {
     socket.async_receive_from(
@@ -57,8 +52,13 @@ void handle_receive(const boost::system::error_code& error,
     start_receive();
     }
     else{
-        pritnf("error in read\n");
+        printf("error in read\n");
     }
+}
+void SocketHandler::start(char * addr, int port){
+    this->socket(this->io_service, udp::endpoint(udp::v4(), port));
+    start_receive();
+    this->io_service.run();
 }
 
 
