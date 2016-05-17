@@ -9,6 +9,7 @@
 							   serial(io,port), 
 							   shutting_down(false)
 	{
+		printf("in lidarScanne Constructor\n");
 		serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 	}						   
 	lidarScanner::~lidarScanner(){}

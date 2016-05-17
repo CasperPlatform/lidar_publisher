@@ -10,6 +10,7 @@
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 #include <string>
+#include <stdio.h>
 
 
 class lidarScanner

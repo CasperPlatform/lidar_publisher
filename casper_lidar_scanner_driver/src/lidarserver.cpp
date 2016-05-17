@@ -19,16 +19,18 @@ lidarserver::lidarserver(const std::string port,
         lidarStop[i]    = 'L';
         lidarStop[i+1]  = 's';
     }
-
+    printf("in lidarserver Constructor\n");
     ros::init(argc, argv, "lidar_scanner_publisher");
     token = "";
     this->argc = argc;
     this->argv = argv;
     this->baud_rate = baud_rate;
     this->polling = false;
+    printf("29\n");
     this->lidar_scanner  = lidar_scanner_ptr(new lidarScanner(port,
                                                             this->baud_rate, 
                                                             this->io_service));
+    printf("33\n");
     this->socket_handler = socket_handler_ptr(new sockethandler(this,9998));
 }
 
@@ -271,7 +273,7 @@ sqlite3 * lidarserver::sqlite_open()
     sqlite3 *sqlite_conn;
 
     int error;
-    if ((error = sqlite3_open("/home/pi/CASPER/db.db", &sqlite_conn)) != 0)
+    if ((error = sqlite3_open("/home/data/casper/db.db", &sqlite_conn)) != 0)
     {
         printf("ohoh %d\n", error);
         return NULL;
