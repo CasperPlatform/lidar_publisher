@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(lidar_scanner_driver)
 set(CMAKE_CXX_FLAGS "-std=c++11")
+##set (CMAKE_PREFIX_PATH "/usr/lib/arm-linux-gnueabihf")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/modules")
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -8,7 +10,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp sensor_msgs)
 
 ## System dependencies are found with CMake's conventions
 find_package(Boost REQUIRED COMPONENTS system thread)
-find_package(SQLITE3)
+find_package(sqlite3 REQUIRED COMPONENTS sqlite3)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -85,10 +87,9 @@ add_dependencies(lidar_scanner_publisher lidar_scanner_driver_generate_messages_
 target_link_libraries(lidar_scanner_publisher
   lidar_scanner_driver
   ${catkin_LIBRARIES}
+  ${SQLITE3_LIBRARIES}
 )
-if (SQLITE3_FOUND)
-  target_link_libraries (lidar_scanner_pulisher ${SQLITE3_LIBRARIES})
-endif (SQLITE3_FOUND)
+
 
 #############
 ## Install ##
