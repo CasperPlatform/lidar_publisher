@@ -6,7 +6,7 @@
 
 
 #include <sockethandler.hpp>
-
+#include <lidarserver.hpp>
 
 //sockethandler::~sockethandler(){}
 sockethandler::sockethandler(lidarserver* server, int port) :

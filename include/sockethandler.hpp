@@ -8,7 +8,7 @@
 
 
 
-
+class lidarserver;
 #include <boost/asio.hpp>
 #include <boost/asio/serial_port.hpp>
 #include <boost/system/error_code.hpp>
@@ -20,7 +20,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
-#include <lidarserver.hpp>
 
 #define UDP_IN_BUF 20
 //#include <driveserver.hpp>
