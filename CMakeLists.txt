@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp sensor_msgs)
 find_package(Boost REQUIRED COMPONENTS system thread)
 find_package(SQLITE3)
 
+
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/groovy/api/catkin/html/user_guide/setup_dot_py.html
@@ -84,6 +85,9 @@ target_link_libraries(lidar_scanner_publisher
   lidar_scanner_driver
   ${catkin_LIBRARIES}
 )
+if (SQLITE3_FOUND)
+  target_link_libraries (lidar_scanner_pulisher ${SQLITE3_LIBRARIES})
+endif (SQLITE3_FOUND)
 
 #############
 ## Install ##
