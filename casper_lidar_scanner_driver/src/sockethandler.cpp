@@ -3,15 +3,18 @@
 *	Author @Pontus Pohl and @Linus Eiderström Swahn
 */
 
-
+ 
 
 #include <sockethandler.hpp>
 #include <lidarserver.hpp>
 
 //sockethandler::~sockethandler(){}
 sockethandler::sockethandler(lidarserver* server, int port) :
-socket(this->io_service, udp::endpoint(udp::v4(), port )),lidar_server(lidar_server_ptr(server))
-{
+socket(this->io_service, udp::endpoint(udp::v4(), port ))
+{ 
+    printf("sockethandler constructor\n");
+    this->lidar_server = new lidar_server_ptr(server);
+    printf("end of sockethandler constructor\n");
     //this->lidarserver = lidar_server_ptr(server);
 }
 sockethandler::~sockethandler(){

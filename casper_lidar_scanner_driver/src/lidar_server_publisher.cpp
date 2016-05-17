@@ -6,6 +6,7 @@ int main(int argc, char** argv) {
 
 printf("starting lidarserver\n");
 lidarserver lidar("/dev/ttyUSB0",115200, argc, argv);
+printf("callign start\n");
 lidar.start();
  
  // Start the node resource managers (communication, time, etc)
