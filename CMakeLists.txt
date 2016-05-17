@@ -66,7 +66,6 @@ include_directories(include
 
 ## Declare a cpp library
  add_library(lidar_scanner_driver
-  src/sockethandler.cpp
   src/lidarserver.cpp
   src/lidarScanner.cpp
  )
