@@ -13,7 +13,7 @@ sockethandler::sockethandler(lidarserver* server, int port) :
 socket(this->io_service, udp::endpoint(udp::v4(), port ))
 { 
     printf("sockethandler constructor\n");
-    this->lidar_server = new lidar_server_ptr(server);
+    this->lidar_server = lidar_server_ptr(server);
     printf("end of sockethandler constructor\n");
     //this->lidarserver = lidar_server_ptr(server);
 }
