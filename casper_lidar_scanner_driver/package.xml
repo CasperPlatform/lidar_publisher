@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>lidar_scanner_driver</name>
+  <name>casper_lidar_scanner_driver</name>
   <version>0.0.1</version>
   <description>LiDAR-lite 360 scanner driver. Parses data from arduino sketch and publishes laser scans.</description>
 
@@ -42,9 +42,10 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>roscpp</build_depend>
-  <build_depend>sqlite3</build_depend>
   <run_depend>boost</run_depend>
-   <run_depend>sqlite3</run_depend>
+  <run_depend>sqlite3</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
