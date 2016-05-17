@@ -67,8 +67,8 @@ class lidarserver{
 
 private:    
     //serial_handler_ptr serialHandler;
-    socket_handler_ptr socketHandler;
-    lidar_scanner_ptr  lidarScanner;     
+    socket_handler_ptr socket_handler;
+    lidar_scanner_ptr  lidar_scanner;     
     std::array<char,READ_BUF> read_buf;
     std::string token; 
     boost::asio::io_service io_service;

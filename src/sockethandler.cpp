@@ -10,7 +10,7 @@
 
 //sockethandler::~sockethandler(){}
 sockethandler::sockethandler(lidarserver* server, int port) :
-socket(this->io_service, udp::endpoint(udp::v4(), port )),lidarserver(lidar_server_ptr(server))
+socket(this->io_service, udp::endpoint(udp::v4(), port )),lidar_server(lidar_server_ptr(server))
 {
     //this->lidarserver = lidar_server_ptr(server);
 }
@@ -41,17 +41,17 @@ void sockethandler::handle_receive(const boost::system::error_code& error,
     if (!error || error == boost::asio::error::message_size)
     { 
       // check token 
-      int res = this->lidarserver->parseRequest(read_buf,read_buf.size());
+      int res = this->lidar_server->parseRequest(read_buf,read_buf.size());
       if(res = -1){
          printf("token verification failed\n");
          start_receive();
          return;
       } 
       else if(res = 0) {
-         this->lidarserver->startPolling();
+         this->lidar_server->startPolling();
       }
       else if(res = 1) {
-         this->lidarserver->stopPolling();
+         this->lidar_server->stopPolling();
       }
     start_receive();
     }

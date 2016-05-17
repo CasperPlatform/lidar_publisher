@@ -26,10 +26,10 @@ lidarserver::lidarserver(const std::string port,
     this->argv = argv;
     this->baud_rate = baud_rate;
     this->polling = false;
-    this->lidarScanner  = lidar_scanner_ptr(new lidarScanner(port,
+    this->lidar_scanner  = lidar_scanner_ptr(new lidarScanner(port,
                                                             this->baud_rate, 
                                                             this->io_service));
-    this->socketHandler = socket_handler_ptr(new sockethandler(this,9998));
+    this->socket_handler = socket_handler_ptr(new sockethandler(this,9998));
 }
 
 lidarserver::~lidarserver(){}
@@ -43,7 +43,7 @@ int lidarserver::start(){
     //     printf("Serial started successfully\n");
     // }
     
-    this->socketHandler->start();
+    this->socket_handler->start();
     //this->socketHandler->startServer("0.0.0.0", "9999");
     return 0;
 }
@@ -73,13 +73,13 @@ int lidarserver::startPolling(){
             sensor_msgs::LaserScan::Ptr scan(new sensor_msgs::LaserScan);
             scan->header.frame_id = frame_id;
             scan->header.stamp = ros::Time::now();
-            lidarScanner->poll(scan);
-            rpms.data=lidarScanner->rpms;
+            lidar_scanner->poll(scan);
+            rpms.data=lidar_scanner->rpms;
             laser_pub.publish(scan);
             motor_pub.publish(rpms);
         }
     }
-    this->lidarScanner->close();
+    this->lidar_scanner->close();
     return 0;
 }
 int lidarserver::stopPolling(){

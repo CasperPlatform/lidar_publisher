@@ -8,7 +8,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp sensor_msgs)
 
 ## System dependencies are found with CMake's conventions
 find_package(Boost REQUIRED COMPONENTS system thread)
-
+find_package(SQLITE3)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
