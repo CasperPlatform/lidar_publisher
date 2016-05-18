@@ -43,7 +43,7 @@ class sockethandler{
         void handle_receive(const boost::system::error_code& error,
         std::size_t bytes_transferred);
     public:
-        sockethandler(void);
+        //sockethandler(void);
         sockethandler(lidarserver* server, int port);
         ~sockethandler();
         void start();
