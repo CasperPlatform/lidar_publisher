@@ -26,7 +26,8 @@ sockethandler::~sockethandler(){
 //     return 0;
 // }
 void sockethandler::start_receive()
-{
+{   
+    printf("setting start receive stuff\n");
     socket.async_receive_from(
         boost::asio::buffer(read_buf), remote_endpoint,
         boost::bind
@@ -63,6 +64,7 @@ void sockethandler::handle_receive(const boost::system::error_code& error,
     }
 }
 void sockethandler::start(){
+    printf("starting socketHandler\n");
     start_receive();
     this->io_service.run();
 }

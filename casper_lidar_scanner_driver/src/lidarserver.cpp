@@ -39,7 +39,7 @@ lidarserver::lidarserver(const std::string port,
 lidarserver::~lidarserver(){}
 
 int lidarserver::start(){
-    printf("driveserver start()\n");
+    printf("lidarserver start()\n");
 
     //this->socketHandler->setServer(*this);
     
