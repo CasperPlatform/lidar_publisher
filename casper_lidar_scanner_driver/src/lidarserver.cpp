@@ -30,8 +30,9 @@ lidarserver::lidarserver(const std::string port,
     this->lidar_scanner  = lidar_scanner_ptr(new lidarScanner(port,
                                                             this->baud_rate, 
                                                             this->io_service));
-    printf("33\n");
     printf("%d",this->baud_rate);
+    printf("33\n");
+    
     this->socket_handler = socket_handler_ptr(new sockethandler(this,9998));
 }
 
