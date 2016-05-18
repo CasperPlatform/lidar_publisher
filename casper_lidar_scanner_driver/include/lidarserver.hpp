@@ -84,7 +84,7 @@ private:
     int verifyToken(const char token[]) const;
 public:
     lidarserver(void);
-    lidarserver(const std::string port, int baud_rate, int argc, char** argv);
+    lidarserver(const std::string port, int baud_r, int argc, char** argv);
     ~lidarserver();    
     int startPolling();
     int stopPolling();    

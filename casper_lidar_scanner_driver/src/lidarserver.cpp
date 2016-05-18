@@ -8,7 +8,7 @@
 
 lidarserver::lidarserver(){}
 lidarserver::lidarserver(const std::string port,
-                         int baud_rate,
+                         int baud_r,
                          int argc, 
                          char** argv)
 {
@@ -24,7 +24,7 @@ lidarserver::lidarserver(const std::string port,
     token = "";
     this->argc = argc;
     this->argv = argv;
-    this->baud_rate = baud_rate;
+    this->baud_rate = baud_r;
     this->polling = false;
     printf("29\n");
     this->lidar_scanner  = lidar_scanner_ptr(new lidarScanner(port,
