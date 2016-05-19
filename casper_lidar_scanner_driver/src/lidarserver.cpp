@@ -90,7 +90,7 @@ int lidarserver::stopPolling(){
     polling = false;
     ros::shutdown();
 }
-int lidarserver::parseRequest(std::array<char,20> &buf, int len) {
+int lidarserver::parseRequest(std::array<char,21> &buf, int len) {
     // parse message and verify token
     //printf("got a buffer to send to arduino\n%s\n",buf);
 
@@ -121,7 +121,7 @@ int lidarserver::parseRequest(std::array<char,20> &buf, int len) {
     }
 
     // check if message is error free.
-    if(r && read_buf.size() == 20){
+    if(r && read_buf.size() == 21){
         printf("got a complete drive message\n");
     }
     else{

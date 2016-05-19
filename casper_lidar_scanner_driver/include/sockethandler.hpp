@@ -21,7 +21,7 @@ class lidarserver;
 #include <stdio.h>
 #include <string>
 
-#define UDP_IN_BUF 20
+#define UDP_IN_BUF 21
 //#include <driveserver.hpp>
 
 
