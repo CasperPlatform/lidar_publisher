@@ -121,7 +121,7 @@ int lidarserver::parseRequest(std::array<char,20> &buf, int len) {
     }
 
     // check if message is error free.
-    if(r && read_buf.size() == 21){
+    if(r && read_buf.size() == 20){
         printf("got a complete drive message\n");
     }
     else{
