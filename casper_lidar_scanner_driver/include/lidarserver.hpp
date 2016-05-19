@@ -88,7 +88,7 @@ public:
     ~lidarserver();    
     int startPolling();
     int stopPolling();    
-    int parseRequest(std::array<char,20> &buf, int len);
+    int parseRequest(std::array<char,21> &buf, int len);
     int start();
     
     
