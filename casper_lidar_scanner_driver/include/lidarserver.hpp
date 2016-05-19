@@ -55,7 +55,7 @@ class lidarScanner;
 */
 #define MAP_REQUEST_START_FLAG 0x53
 // OTHER
-#define READ_BUF 24
+#define READ_BUF 20
 
 
 

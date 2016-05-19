@@ -92,7 +92,7 @@ int lidarserver::stopPolling(){
 }
 int lidarserver::parseRequest(std::array<char,20> &buf, int len) {
     // parse message and verify token
-    printf("got a buffer to send to arduino\n%s\n",buf);
+    //printf("got a buffer to send to arduino\n%s\n",buf);
 
     printf("length is %d\n",len);
 
