@@ -151,7 +151,7 @@ int lidarserver::parseRequest(std::array<char,21> &buf, int len) {
         printf("Wring lidar flag\n");
         return -1;
     }
-    if(start != 0x53 || start != 0x73){
+    if(start != 0x53 && start != 0x73){
         printf("wrong start/stop flag\n");
         return -1;
     }
