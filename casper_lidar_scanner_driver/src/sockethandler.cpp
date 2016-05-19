@@ -41,10 +41,12 @@ void sockethandler::start_receive()
 void sockethandler::handle_receive(const boost::system::error_code& error,
       std::size_t bytes_transferred)
   {
+    printf("got something\n");
     // if no error
     if (!error || error == boost::asio::error::message_size)
     { 
       // check token 
+      printf("calling lidarserver parseRequest\n");
       int res = this->lidar_server->parseRequest(read_buf,read_buf.size());
       if(res = -1){
          printf("token verification failed\n");
