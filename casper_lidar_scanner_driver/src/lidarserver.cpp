@@ -130,8 +130,8 @@ int lidarserver::parseRequest(std::array<char,21> &buf, int len) {
     }
     // extract token.
     char tmp[17];
-    for(int i = 1; i < 17; i++){
-        tmp[i-1] = read_buf[i];
+    for(int i = 2; i < 17; i++){
+        tmp[i-2] = read_buf[i];
     }
     tmp[16] = '\0';
     printf("token is %s\n",tmp);
