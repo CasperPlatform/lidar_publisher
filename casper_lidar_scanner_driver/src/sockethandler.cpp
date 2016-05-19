@@ -42,7 +42,7 @@ void sockethandler::handle_receive(const boost::system::error_code& error,
       std::size_t bytes_transferred)
   {
     printf("got something\n");
-    std::string message_string(recv_buffer.data(), recv_buffer.data() + bytes_transferred);
+    std::string message_string(read_buf.data(), read_buf.data() + bytes_transferred);
     
     std::cout << "message \"" << message_string.c_str() << "\" received." << std::endl;
     // if no error
