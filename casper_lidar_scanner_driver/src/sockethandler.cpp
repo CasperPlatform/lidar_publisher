@@ -50,15 +50,16 @@ void sockethandler::handle_receive(const boost::system::error_code& error,
       // check token 
       printf("calling lidarserver parseRequest\n");
       int res = this->lidar_server->parseRequest(this->read_buf,read_buf.size());
-      if(res = -1){
+      if(res == -1){
+         
          printf("token verification failed\n");
          start_receive();
          return;
       } 
-      else if(res = 0) {
+      else if(res == 0) {
          this->lidar_server->startPolling();
       }
-      else if(res = 1) {
+      else if(res == 1) {
          this->lidar_server->stopPolling();
       }
     start_receive();
