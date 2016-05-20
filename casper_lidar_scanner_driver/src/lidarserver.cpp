@@ -122,7 +122,7 @@ int lidarserver::parseRequest(std::array<char,21> &buf, int len) {
 
     // check if message is error free.
     if(r && read_buf.size() == 21){
-        printf("got a complete drive message\n");
+        printf("got a complete lidar message\n");
     }
     else{
         printf("Message error found.\n");
@@ -147,6 +147,8 @@ int lidarserver::parseRequest(std::array<char,21> &buf, int len) {
     }
     char lidar = read_buf[0];
     char start = read_buf[1];
+    printf("%c\n",lidar);
+    printf("%c\n",start);
     if(lidar != 0x4c){
         printf("Wring lidar flag\n");
         return -1;
