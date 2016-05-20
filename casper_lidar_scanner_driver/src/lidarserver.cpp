@@ -149,19 +149,19 @@ int lidarserver::parseRequest(std::array<char,21> &buf, int len) {
     char start = read_buf[1];
     printf("%c\n",lidar);
     printf("%c\n",start);
-    if(lidar != 0x4c){
+    if(lidar != 'L'){
         printf("Wring lidar flag\n");
         return -1;
     }
-    if(start != 0x53 && start != 0x73){
+    if(start != 'S' && start != 's'){
         printf("wrong start/stop flag\n");
         return -1;
     }
-    if(start == 0x53){
+    if(start == 'S'){
         // we got LS, start mapping
         return 0;
     }
-    else if(start = 0x73){
+    else if(start = 's'){
         // we got Ls, stop mapping
         return 1;
     }
