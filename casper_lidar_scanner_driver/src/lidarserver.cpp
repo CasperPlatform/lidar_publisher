@@ -158,10 +158,12 @@ int lidarserver::parseRequest(std::array<char,21> &buf, int len) {
         return -1;
     }
     if(start == 'S'){
+        printf("we got LS\n");
         // we got LS, start mapping
         return 0;
     }
     else if(start = 's'){
+        printf("we got Ls\n");
         // we got Ls, stop mapping
         return 1;
     }
