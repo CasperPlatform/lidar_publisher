@@ -280,7 +280,7 @@ sqlite3 * lidarserver::sqlite_open()
     sqlite3 *sqlite_conn;
 
     int error;
-    if ((error = sqlite3_open("/root/db.db", &sqlite_conn)) != 0)
+    if ((error = sqlite3_open("/home/builder/db.db", &sqlite_conn)) != 0)
     {
         printf("ohoh %d\n", error);
         return NULL;
