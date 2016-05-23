@@ -27,9 +27,9 @@ lidarserver::lidarserver(const std::string port,
     this->baud_rate = baud_r;
     this->polling = false;
     printf("29\n");
-    this->lidar_scanner  = lidar_scanner_ptr(new lidarScanner(port,
+    /*this->lidar_scanner  = lidar_scanner_ptr(new lidarScanner(port,
                                                             this->baud_rate, 
-                                                            this->io_service));
+                                                            this->io_service));*/
     printf("%d\n",this->baud_rate);
     printf("33\n");
     
@@ -72,18 +72,40 @@ int lidarserver::startPolling(){
     std_msgs::UInt16 rpms;
     while(this->polling){
         
+        int scan_position = 0;
+		int distance = 2;
+        
         while(ros::ok())
         {
             sensor_msgs::LaserScan::Ptr scan(new sensor_msgs::LaserScan);
             scan->header.frame_id = frame_id;
             scan->header.stamp = ros::Time::now();
-            lidar_scanner->poll(scan);
-            rpms.data=lidar_scanner->rpms;
+            //lidar_scanner->poll(scan);
+            scan->angle_min = 0.0;
+            scan->angle_max = 2.0*M_PI;
+            scan->angle_increment = (2.0*M_PI/360.0);
+            scan->range_min = 0.01;
+            scan->range_max = 6.0;
+            scan->ranges.resize(360);
+            scan->intensities.resize(360);
+            
+            scan->ranges[scan_position] = distance / 100.0; //centimeter to meter conversion
+			scan->intensities[scan_position] = distance;
+			scan->time_increment = 1080; //seconds between scan poins
+           
+            rpms.data=180;
             laser_pub.publish(scan);
-            motor_pub.publish(rpms);
+            motor_pub.publish(180);
+            
+            scan_position += 1;
+            
+            if(scan_position >=360)
+            {
+                scan_position -= 360;
+            }
         }
     }
-    this->lidar_scanner->close();
+    //this->lidar_scanner->close();
     return 0;
 }
 int lidarserver::stopPolling(){
