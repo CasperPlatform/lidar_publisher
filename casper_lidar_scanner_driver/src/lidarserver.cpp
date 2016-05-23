@@ -95,7 +95,7 @@ int lidarserver::startPolling(){
            
             rpms.data=180;
             laser_pub.publish(scan);
-            motor_pub.publish(180);
+            motor_pub.publish(rpms);
             
             scan_position += 1;
             
