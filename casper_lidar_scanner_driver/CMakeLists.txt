@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(casper_lidar_scanner_driver)
 set(CMAKE_CXX_FLAGS "-std=c++11")
 ##set (CMAKE_PREFIX_PATH "/usr/lib/arm-linux-gnueabihf")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/casper_lidar_scanner_driver/modules")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/casper_lidar_scanner_driver/casper_lidar_scanner_driver/modules")
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
