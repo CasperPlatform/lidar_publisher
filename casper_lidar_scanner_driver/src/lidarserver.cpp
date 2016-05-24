@@ -115,7 +115,7 @@ int lidarserver::startPolling(){
                     scan_position -= 360;
                 }
                 
-                boost::this_thread::sleep(boost::posix_time::milliseconds(5));
+                boost::this_thread::sleep(boost::posix_time::milliseconds(20));
 
             }
             
