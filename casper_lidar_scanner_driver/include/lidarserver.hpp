@@ -82,6 +82,7 @@ private:
     static sqlite3 *sqlite_open();  
     int verifyToken(const char token[]) const;
     boost::thread service_thread;
+    bool initialized = false;
 
 public:
     lidarserver(void);
