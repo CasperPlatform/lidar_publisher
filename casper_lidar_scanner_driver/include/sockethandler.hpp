@@ -38,7 +38,10 @@ class sockethandler{
         //boost::asio::io_service io_service;
         lidar_server_ptr lidar_server;
         std::array<char,UDP_IN_BUF> read_buf;
-        
+        boost::thread service_thread;
+
+        void initialize();
+
         void start_receive();
         void handle_receive(const boost::system::error_code& error,
         std::size_t bytes_transferred);

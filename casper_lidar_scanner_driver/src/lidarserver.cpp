@@ -47,7 +47,7 @@ int lidarserver::start(){
     //     printf("Serial started successfully\n");
     // }
     
-    this->socket_handler->start();
+    //this->socket_handler->start();
     //this->socketHandler->startServer("0.0.0.0", "9999");
     return 0;
 }

@@ -10,7 +10,8 @@
 
 //sockethandler::~sockethandler(){}
 sockethandler::sockethandler(lidarserver* server, int port) :
-socket(io_service, udp::endpoint(udp::v4(), port ))
+socket(io_service, udp::endpoint(udp::v4(), port )),
+service_thread(std::bind(&sockethandler::initialize, this))
 { 
     printf("sockethandler constructor\n");
     this->lidar_server = lidar_server_ptr(server);
@@ -19,6 +20,12 @@ socket(io_service, udp::endpoint(udp::v4(), port ))
 }
 sockethandler::~sockethandler(){
   this->io_service.stop();
+}
+
+void sockethandler::initialize()
+{
+    start_receive();
+    io_service.run();
 }
 
 // int sockethandler::setServer(driveserver & server) const {
