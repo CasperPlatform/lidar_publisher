@@ -35,17 +35,6 @@ lidarserver::lidarserver(const std::string port,
     
     this->socket_handler = socket_handler_ptr(new sockethandler(this,9998));
     
-    ros::init(this->argc, this->argv, "lidar_scanner_publisher");
-    ROS_INFO_STREAM("Lidar Scanner Publisher");
-    ros::NodeHandle nh;
-    ros::NodeHandle priv_nh("~");
-    priv_nh.param("port", this->port, this->port);
-    priv_nh.param("baud_rate", this->baud_rate, this->baud_rate);
-    priv_nh.param("frame_id", this->frame_id, std::string("lidar_scanner"));
-
-    ros::Publisher laser_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1000);
-    ros::Publisher motor_pub = nh.advertise<std_msgs::UInt16>("rpms",1000);
-    std_msgs::UInt16 rpms;
 }
 
 lidarserver::~lidarserver(){}
@@ -69,12 +58,28 @@ int lidarserver::startPolling(){
     //     printf("serialwrite failed\n");
     //     return -1;
     // }
-    
+    bool initialized = false;
     
     while(true)
     {
         while(this->polling){
             
+            if(!initialized)
+            {
+                ros::init(this->argc, this->argv, "lidar_scanner_publisher");
+                ROS_INFO_STREAM("Lidar Scanner Publisher");
+                ros::NodeHandle nh;
+                ros::NodeHandle priv_nh("~");
+                priv_nh.param("port", this->port, this->port);
+                priv_nh.param("baud_rate", this->baud_rate, this->baud_rate);
+                priv_nh.param("frame_id", this->frame_id, std::string("lidar_scanner"));
+
+                ros::Publisher laser_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1000);
+                ros::Publisher motor_pub = nh.advertise<std_msgs::UInt16>("rpms",1000);
+                std_msgs::UInt16 rpms;
+                
+                initialized = true;
+            }
             int scan_position = 0;
             int distance = 2;
             
@@ -110,6 +115,8 @@ int lidarserver::startPolling(){
                 boost::this_thread::sleep(boost::posix_time::milliseconds(5));
 
             }
+            
+            initialized = false;
         }
     }
     //this->lidar_scanner->close();
