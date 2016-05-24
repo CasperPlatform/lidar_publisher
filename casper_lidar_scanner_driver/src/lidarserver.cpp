@@ -48,6 +48,11 @@ int lidarserver::start(){
     // }
     initialized = true;
     
+    
+    while(true)
+    {
+        
+    }
     //this->socket_handler->start();
     //this->socketHandler->startServer("0.0.0.0", "9999");
     return 0;
