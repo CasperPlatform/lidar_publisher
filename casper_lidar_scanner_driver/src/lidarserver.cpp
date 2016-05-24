@@ -100,7 +100,7 @@ int lidarserver::startPolling(){
                 scan->ranges.resize(360);
                 scan->intensities.resize(360);
                 
-                scan->ranges[scan_position] = distance / 100.0; //centimeter to meter conversion
+                scan->ranges[scan_position] = distance; //centimeter to meter conversion
                 scan->intensities[scan_position] = distance;
                 scan->time_increment = 1080; //seconds between scan poins
             
