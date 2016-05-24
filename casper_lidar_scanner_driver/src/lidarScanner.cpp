@@ -62,7 +62,7 @@
 			scan->intensities[scan_position] = distance;
 			scan->time_increment = degreesPerSecond; //seconds between scan poins
 
-			if ( ++points >= 5)
+			if ( ++points >= 10)
 			{
 				scan_ready = true;
 			}

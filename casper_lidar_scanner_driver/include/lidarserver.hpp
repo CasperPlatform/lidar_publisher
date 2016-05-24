@@ -76,12 +76,13 @@ private:
     int baud_rate;
     char lidarStart[2];
     char lidarStop[2];
-    bool polling;
     int argc;
     char ** argv;
     std::string frame_id;
     static sqlite3 *sqlite_open();  
     int verifyToken(const char token[]) const;
+    boost::thread service_thread;
+
 public:
     lidarserver(void);
     lidarserver(const std::string port, int baud_r, int argc, char** argv);
@@ -90,7 +91,8 @@ public:
     int stopPolling();    
     int parseRequest(std::array<char,21> &buf, int len);
     int start();
-    
+    bool polling;
+
     
     
 };

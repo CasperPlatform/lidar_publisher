@@ -10,7 +10,7 @@ lidarserver::lidarserver(){}
 lidarserver::lidarserver(const std::string port,
                          int baud_r,
                          int argc, 
-                         char** argv)
+                         char** argv) : service_thread(std::bind(&lidarserver::startPolling, this))
 {
     read_buf.fill(0);
     for(int i = 0; i>1; i++){
@@ -57,7 +57,7 @@ int lidarserver::startPolling(){
     //     printf("serialwrite failed\n");
     //     return -1;
     // }
-    polling = true;
+    polling = false;
 
     ros::init(this->argc, this->argv, "lidar_scanner_publisher");
     ROS_INFO_STREAM("Lidar Scanner Publisher");
@@ -70,38 +70,45 @@ int lidarserver::startPolling(){
     ros::Publisher laser_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1000);
     ros::Publisher motor_pub = nh.advertise<std_msgs::UInt16>("rpms",1000);
     std_msgs::UInt16 rpms;
-    while(this->polling){
-        
-        int scan_position = 0;
-		int distance = 2;
-        
-        while(ros::ok())
-        {
-            sensor_msgs::LaserScan::Ptr scan(new sensor_msgs::LaserScan);
-            scan->header.frame_id = frame_id;
-            scan->header.stamp = ros::Time::now();
-            //lidar_scanner->poll(scan);
-            scan->angle_min = 0.0;
-            scan->angle_max = 2.0*M_PI;
-            scan->angle_increment = (2.0*M_PI/360.0);
-            scan->range_min = 0.01;
-            scan->range_max = 6.0;
-            scan->ranges.resize(360);
-            scan->intensities.resize(360);
+    
+    while(true)
+    {
+        while(this->polling){
             
-            scan->ranges[scan_position] = distance / 100.0; //centimeter to meter conversion
-			scan->intensities[scan_position] = distance;
-			scan->time_increment = 1080; //seconds between scan poins
-           
-            rpms.data=180;
-            laser_pub.publish(scan);
-            motor_pub.publish(rpms);
+            int scan_position = 0;
+            int distance = 2;
             
-            scan_position += 1;
-            
-            if(scan_position >=360)
+            while(ros::ok())
             {
-                scan_position -= 360;
+                sensor_msgs::LaserScan::Ptr scan(new sensor_msgs::LaserScan);
+                scan->header.frame_id = frame_id;
+                scan->header.stamp = ros::Time::now();
+                //lidar_scanner->poll(scan);
+                scan->angle_min = 0.0;
+                scan->angle_max = 2.0*M_PI;
+                scan->angle_increment = (2.0*M_PI/360.0);
+                scan->range_min = 0.01;
+                scan->range_max = 6.0;
+                scan->ranges.resize(360);
+                scan->intensities.resize(360);
+                
+                scan->ranges[scan_position] = distance / 100.0; //centimeter to meter conversion
+                scan->intensities[scan_position] = distance;
+                scan->time_increment = 1080; //seconds between scan poins
+            
+                rpms.data=180;
+                laser_pub.publish(scan);
+                motor_pub.publish(rpms);
+                
+                scan_position += 1;
+                
+                if(scan_position >=360)
+                {
+                    scan_position -= 360;
+                }
+                
+                boost::this_thread::sleep(boost::posix_time::milliseconds(5));
+
             }
         }
     }

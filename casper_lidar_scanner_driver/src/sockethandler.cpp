@@ -64,10 +64,10 @@ void sockethandler::handle_receive(const boost::system::error_code& error,
          return;
       } 
       else if(res == 0) {
-         this->lidar_server->startPolling();
+         this->lidar_server->polling = true;
       }
       else if(res == 1) {
-         this->lidar_server->stopPolling();
+         this->lidar_server->polling = false;
       }
     start_receive();
     }
