@@ -159,6 +159,7 @@ int lidarserver::parseRequest(std::array<char,21> &buf, int len) {
     }
     if(start == 'S'){
         printf("we got LS\n");
+        this->startPolling();
         // we got LS, start mapping
         return 0;
     }
