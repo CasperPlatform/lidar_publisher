@@ -20,6 +20,7 @@ class lidarScanner
 		lidarScanner(const std::string& port, uint32_t baud_rate, boost::asio::io_service& io);
 		~lidarScanner();
 		void poll(sensor_msgs::LaserScan::Ptr scan);
+		void startLidar();
 		void close(){ shutting_down = true; };
 	private:
 	    std::string               port;

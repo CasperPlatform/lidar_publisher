@@ -59,6 +59,8 @@ int lidarserver::startPolling(){
     // }
     polling = true;
 
+    lidar_scanner->startLidar();
+
     ros::init(this->argc, this->argv, "lidar_scanner_publisher");
     ROS_INFO_STREAM("Lidar Scanner Publisher");
     ros::NodeHandle nh;

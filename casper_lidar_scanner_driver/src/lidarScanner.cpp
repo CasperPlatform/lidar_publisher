@@ -13,7 +13,14 @@
 		serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 	}						   
 	lidarScanner::~lidarScanner(){}
-	
+	void lidarScanner::startLidar(){
+
+		boost::system::error_code ec;
+
+		char* buf = "LS\n";
+		
+		serial.write_some(boost::asio::buffer(buf,3), ec);
+	}
 	void lidarScanner::poll(sensor_msgs::LaserScan::Ptr scan) {
 		
 		uint8_t points = 0;
