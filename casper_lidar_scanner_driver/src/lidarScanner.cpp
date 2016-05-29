@@ -38,7 +38,7 @@
 		{
 			boost::asio::streambuf response;
 
-			boost::asio::read_until(serial, response, "\r\n" );
+			boost::asio::read_until(serial, response, "\n" );
 
 		    std::istream response_stream(&response);
 		    response_stream >> scan_position;
