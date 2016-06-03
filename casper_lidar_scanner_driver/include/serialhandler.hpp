@@ -49,7 +49,7 @@ public:
 	virtual void stop();
 
 	int write_string(const std::string &buf);
-	int write_bytes(char buf[], const int &size);
+	int write_bytes(const char *, const int &size);
 
 	//static int get_port_number();
 	//static std::string get_port_name(const unsigned int &idx);

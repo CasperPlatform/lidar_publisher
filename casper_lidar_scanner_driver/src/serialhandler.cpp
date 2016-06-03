@@ -68,19 +68,27 @@ void serialhandler::stop()
 
 int serialhandler::write_string(const std::string &buf)
 {
-    return 1; //write_bytes(buf.c_str(), buf.size());
+    return write_bytes(buf.c_str(), buf.size());
 }
 
-int serialhandler::write_bytes(char buf[], const int &size)
+int serialhandler::write_bytes(const char * buf, const int &size)
 {
     boost::system::error_code ec;
-
+    // port.set_option( asio_serial::baud_rate( 115200) );
+    // port.set_option( asio_serial::flow_control( asio_serial::flow_control::none ) );
+    // port.set_option( asio_serial::parity( asio_serial::parity::none ) );
+    // port.set_option( asio_serial::stop_bits( asio_serial::stop_bits::one ) );
+    // port.set_option( asio_serial::character_size( 8 ) );
     
-    if(!port) return -1;
+    if(!port){
+        printf("port not open\n");
+        return -1;
+
+    } 
     if(size==0) return 0;
 
-    boost::asio::write(port, boost::asio::buffer(buf, 2));
-    /*int result = port->write_some(boost::asio::buffer(buf, size), ec);
+    
+    int result = port->write_some(boost::asio::buffer(buf, size), ec);
     
     if(ec)
     {
@@ -89,8 +97,8 @@ int serialhandler::write_bytes(char buf[], const int &size)
     else 
     {
         return result;
-    }*/
-    return 1;
+    }
+   
 }
 
 void serialhandler::async_read()
