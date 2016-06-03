@@ -63,7 +63,7 @@
 		} 
 	}
 	
-	void updateScan(std::string scanMessage)
+	void lidarScanner::updateScan(std::string scanMessage)
 	{
 		std::istringstream response_stream(scanMessage);
 		
