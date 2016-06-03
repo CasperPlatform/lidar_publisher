@@ -4,7 +4,7 @@
 */
 
 #include "serialhandler.hpp"
-
+#include "lidarScanner.hpp"
 
 serialhandler::serialhandler(lidarScanner* scanner) : end_of_line_char('\n')
 {
