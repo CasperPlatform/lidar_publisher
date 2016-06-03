@@ -71,13 +71,15 @@ int serialhandler::write_string(const std::string &buf)
     return write_bytes(buf.c_str(), buf.size());
 }
 
-int serialhandler::write_bytes(const char *buf, const int &size)
+int serialhandler::write_bytes(char buf[], const int &size)
 {
     boost::system::error_code ec;
 
+    
     if(!port) return -1;
     if(size==0) return 0;
 
+    boost::asio::write(port, boost::asio::buffer(buf, 2))
     int result = port->write_some(boost::asio::buffer(buf, size), ec);
     
     if(ec)
@@ -88,7 +90,6 @@ int serialhandler::write_bytes(const char *buf, const int &size)
     {
         return result;
     }
-    
 }
 
 void serialhandler::async_read()

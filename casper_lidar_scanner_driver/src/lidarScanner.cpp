@@ -18,7 +18,7 @@
 	lidarScanner::~lidarScanner(){}
 	void lidarScanner::startLidar(){
 
-		char* buf = "LS";
+		char buf[]{'L','S'};
 		
 		this->serialHandler->write_bytes(buf,2);
 		printf("sent LS to lidar\n");
