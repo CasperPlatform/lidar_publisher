@@ -68,7 +68,7 @@ void serialhandler::stop()
 
 int serialhandler::write_string(const std::string &buf)
 {
-    return write_bytes(buf.c_str(), buf.size());
+    return 1 //write_bytes(buf.c_str(), buf.size());
 }
 
 int serialhandler::write_bytes(char buf[], const int &size)
