@@ -72,6 +72,7 @@ include_directories(include
   src/lidarserver.cpp
   src/lidarScanner.cpp
   src/sockethandler.cpp
+  src/serialhandler.cpp
  )
 
 ## Declare a cpp executable
