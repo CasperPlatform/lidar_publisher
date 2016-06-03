@@ -6,9 +6,9 @@
 #include "serialhandler.hpp"
 
 
-serialhandler::serialhandler(void) : end_of_line_char('\n')
+serialhandler::serialhandler(lidarScanner* scanner) : end_of_line_char('\n')
 {
-    
+    this->lidar_scanner = lidarScannerPointer(scanner);
 }
 serialhandler::~serialhandler(void)
 {
@@ -119,5 +119,5 @@ void serialhandler::on_receive(const boost::system::error_code& ec, size_t bytes
     }
 }
 void serialhandler::on_receive(const std::string & data){
-    std::cout << "serialhandler::on_receive() : " << data << std::endl;
+    this->lidar_scanner->updateScan(data);
 }

@@ -17,6 +17,7 @@
 #include <boost/thread.hpp>
 
 typedef boost::shared_ptr<boost::asio::serial_port> serial_port_ptr;
+typedef boost::shared_ptr<lidarScanner> lidarScannerPointer;
 
 #define SERIAL_PORT_READ_BUF_SIZE 256
 
@@ -31,19 +32,20 @@ protected:
 	std::string read_buf_str;
 
 	char end_of_line_char;
+	lidarScannerPointer lidar_scanner;
 
 /*private:
 	SerialPort(const SerialPort &p);
 	SerialPort &operator=(const SerialPort &p); 
 */
 public:
-	serialhandler(void);
+	serialhandler(lidarScanner* scanner);
 	virtual ~serialhandler(void);
 	
 	char get_eol_char() const;
 	void set_eol_char(const char &c);
 
-	virtual bool start(const char *com_port_name, int baud_rate=9600);
+	virtual bool start(const char *com_port_name, int baud_rate=11520);
 	virtual void stop();
 
 	int write_string(const std::string &buf);
