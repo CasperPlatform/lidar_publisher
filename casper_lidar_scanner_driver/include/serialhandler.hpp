@@ -45,7 +45,7 @@ public:
 	char get_eol_char() const;
 	void set_eol_char(const char &c);
 
-	virtual bool start(const char *com_port_name, int baud_rate=11520);
+	virtual bool start(const char *com_port_name, int baud_rate);
 	virtual void stop();
 
 	int write_string(const std::string &buf);
