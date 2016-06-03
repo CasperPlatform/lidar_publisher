@@ -78,11 +78,17 @@ int serialhandler::write_bytes(const char *buf, const int &size)
     if(!port) return -1;
     if(size==0) return 0;
 
+    int result = port->write_some(boost::asio::buffer(buf, size), ec);
+    
     if(ec)
     {
         printf("%s\n", ec.message().c_str());
     }
-    return port->write_some(boost::asio::buffer(buf, size), ec);
+    else 
+    {
+        return result;
+    }
+    
 }
 
 void serialhandler::async_read()
