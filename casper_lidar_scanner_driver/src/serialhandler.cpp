@@ -80,7 +80,7 @@ int serialhandler::write_bytes(char buf[], const int &size)
     if(size==0) return 0;
 
     boost::asio::write(port, boost::asio::buffer(buf, 2))
-    int result = port->write_some(boost::asio::buffer(buf, size), ec);
+    /*int result = port->write_some(boost::asio::buffer(buf, size), ec);
     
     if(ec)
     {
@@ -89,7 +89,8 @@ int serialhandler::write_bytes(char buf[], const int &size)
     else 
     {
         return result;
-    }
+    }*/
+    return 1;
 }
 
 void serialhandler::async_read()
