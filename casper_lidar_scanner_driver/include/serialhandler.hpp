@@ -6,7 +6,7 @@
 #ifndef serial_handler_h
 #define serial_handler_h
 
-
+class lidarScanner;
 //class driveserver;
 //#include <driveserver.hpp>
 #include <boost/asio.hpp>
