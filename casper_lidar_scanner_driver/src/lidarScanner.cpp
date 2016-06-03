@@ -18,7 +18,7 @@
 	lidarScanner::~lidarScanner(){}
 	void lidarScanner::startLidar(){
 
-		char buf[2] = "LS";
+		char buf[2]{'L','S'};
 		
 		this->serialHandler->write_bytes(buf,2);
 	}
@@ -65,7 +65,7 @@
 	
 	void updateScan(std::string scanMessage)
 	{
-		std::istringstream response_stream(scanMessage)
+		std::istringstream response_stream(scanMessage);
 		
 		response_stream >> scan_position;
 		response_stream >> dummy;

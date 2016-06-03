@@ -24,7 +24,7 @@ class lidarScanner
 		void poll(sensor_msgs::LaserScan::Ptr scan);
 		void startLidar();
 		void close(){ shutting_down = true; };
-		void updateScan(std::string scanMessage)
+		void updateScan(std::string scanMessage);
 	private:
 	    std::string               port;
 	    uint32_t                  baud_rate;
