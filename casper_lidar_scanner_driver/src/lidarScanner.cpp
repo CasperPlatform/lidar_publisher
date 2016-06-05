@@ -41,10 +41,11 @@
 
 		while (!this->shutting_down && !scan_ready) 
 		{
-			printf("in poll method while loop\n");
+			//printf("in poll method while loop\n");
 		    //ROS_INFO( "Read Point: %d, %d, %f, %d" , scan_position, distance, degreesPerSecond, scan_time_ms );
 			if(scanRecieved)
 			{
+				printf("scan received\n");
 				if ( scan_time_ms > 25 )
 				{
 					ROS_WARN( "LIDAR-Lite sampling took %d milliseconds", scan_time_ms );
@@ -67,7 +68,8 @@
 	}
 	
 	void lidarScanner::updateScan(std::string scanMessage)
-	{
+	{	
+		printf("got data from serial\n");
 		std::istringstream response_stream(scanMessage);
 		
 		response_stream >> scan_position;

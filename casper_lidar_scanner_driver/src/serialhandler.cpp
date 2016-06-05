@@ -104,6 +104,7 @@ int serialhandler::write_bytes(const char * buf, const int &size)
 void serialhandler::async_read()
 {
     if( port.get() == NULL || !port->is_open()){
+        printf("async read error in async_read()\n");
         return;
     } 
     
@@ -120,15 +121,19 @@ void serialhandler::on_receive(const boost::system::error_code& ec, size_t bytes
     
     if( port.get() == NULL || !port->is_open())
     {
+        printf("error in on_receive\n");
         return;
     }
     if(ec) {
+        printf("ec in on_receive\n");
         async_read();
         return;
     }    
     for(unsigned int i = 0; i < bytes_transferred; i++){
         char c = read_buf_raw[i];
-        if(c == end_of_line_char) {
+        printf("%c",c);
+        if(c == end_of_line_char && c == '\r') {
+            printf("got end of line\n");
             this->on_receive(read_buf_str);
             read_buf_str.clear();
         }
