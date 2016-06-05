@@ -59,7 +59,7 @@ public:
 protected:
 	virtual void async_read();
 	virtual void on_receive(const boost::system::error_code& ec, size_t bytes_transferred);
-	virtual void on_receive(const std::string &data);
+	virtual void on_received(const std::string &data);
 
 };
 #endif // serial_handler_h

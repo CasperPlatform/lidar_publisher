@@ -138,7 +138,7 @@ void serialhandler::on_receive(const boost::system::error_code& ec, size_t bytes
         printf("%c",c);
         if(c == end_of_line_char && c == '\r') {
             printf("got end of line\n");
-            this->on_receive(read_buf_str);
+            this->on_received(read_buf_str);
             read_buf_str.clear();
         }
         else
@@ -147,7 +147,7 @@ void serialhandler::on_receive(const boost::system::error_code& ec, size_t bytes
         }
     }
 }
-void serialhandler::on_receive(const std::string & data){
+void serialhandler::on_received(const std::string & data){
     printf("updatescan in serialhandler\n");
     this->lidar_scanner->updateScan(data);
 }
