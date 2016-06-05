@@ -45,7 +45,7 @@ bool serialhandler::start(const char * com_port_name, int baud_rate){
 
     port->set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 
-    boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
+    //boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
     
     
     async_read();
