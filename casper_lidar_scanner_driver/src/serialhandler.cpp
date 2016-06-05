@@ -6,8 +6,15 @@
 #include "serialhandler.hpp"
 #include "lidarScanner.hpp"
 
-serialhandler::serialhandler(lidarScanner* scanner) : end_of_line_char('\n')
+serialhandler::serialhandler(lidarScanner* scanner, 
+                            const char * com_port, 
+                            int baud) : 
+end_of_line_char('\n'), 
+com_port_name(com_port),
+baud_rate(baud),
+service_thread(std::bind(&sockethandler::initialize, this))
 {   
+
     printf("serialHandler constructor\n");
     this->lidar_scanner = lidarScannerPointer(scanner);
 }
@@ -17,7 +24,9 @@ serialhandler::~serialhandler(void)
 }
 
 void serialhandler::initialize(){
-
+    this->start(this->com_port_name,this->baud_rate);
+    async_read();
+    io_service.run();
 }
 char serialhandler::get_eol_char() const
 {
@@ -49,15 +58,10 @@ bool serialhandler::start(const char * com_port_name, int baud_rate){
 
     port->set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 
-    boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
-    
-    
-    async_read();
-    io_service.run();
     return true;
 }
 void serialhandler::start_read(){
-    printf("calling async_read()\n");
+    //printf("calling async_read()\n");
     
    
 

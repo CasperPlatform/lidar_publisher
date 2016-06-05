@@ -11,8 +11,9 @@
 	{
 		printf("in lidarScanne Constructor\n");
 		//serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
-		this->serialHandler = serial_handler_ptr(new serialhandler(this));
-    	this->serialHandler->start("/dev/ttyUSB0",115200);
+		this->serialHandler = serial_handler_ptr(new serialhandler(this),
+												"/dev/ttyUSB0",115200);
+    	//this->serialHandler->start("/dev/ttyUSB0",115200);
 	}	
 						   
 	lidarScanner::~lidarScanner(){}

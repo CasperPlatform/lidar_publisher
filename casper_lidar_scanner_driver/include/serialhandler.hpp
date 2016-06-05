@@ -34,14 +34,17 @@ protected:
 	char end_of_line_char;
 	lidarScannerPointer lidar_scanner;
 	boost::thread service_thread;
-
+	const char * com_port_name; 
+	int baud_rate;
 /*private:
 	SerialPort(const SerialPort &p);
 	SerialPort &operator=(const SerialPort &p); 
 */
 public:
 	serial_port_ptr port;
-	serialhandler(lidarScanner* scanner);
+	serialhandler(lidarScanner* scanner, 
+                  const char * com_port, 
+                  int baud);
 	virtual ~serialhandler(void);
 	
 	char get_eol_char() const;
