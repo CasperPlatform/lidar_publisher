@@ -23,7 +23,7 @@
 		
 		this->serialHandler->write_bytes(buf,2);
 		printf("sent LS to lidar\n");
-		//this->serialHandler->start_read();
+		this->serialHandler->start_read();
 	}
 	
 	void lidarScanner::poll(sensor_msgs::LaserScan::Ptr scan) {
@@ -43,22 +43,7 @@
 		while (!this->shutting_down && !scan_ready) 
 		{	
 
-			boost::asio::streambuf response;
 
-			boost::asio::read_until(serialHandler->port, response, "\r\n" );
-
-
-			std::istream response_stream(&response);
-		    response_stream >> scan_position;
-		    response_stream >> dummy;
-		    response_stream >> distance;
-		    response_stream >> dummy;
-		    response_stream >> degreesPerSecond;
-		    response_stream >> dummy;
-		    response_stream >> scan_time_ms;
-		    if(distance != 0){
-		    	scanRecieved = true;
-		    }
 			//printf("in poll method while loop\n");
 		    //ROS_INFO( "Read Point: %d, %d, %f, %d" , scan_position, distance, degreesPerSecond, scan_time_ms );
 			if(scanRecieved)
