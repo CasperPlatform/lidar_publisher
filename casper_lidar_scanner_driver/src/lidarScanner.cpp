@@ -63,6 +63,7 @@
 				if ( ++points >= 5)
 				{
 					scan_ready = true;
+					printf("scan ready\n");
 				}
 				
 				scanRecieved = false;
