@@ -19,7 +19,7 @@ class lidarScanner;
 typedef boost::shared_ptr<boost::asio::serial_port> serial_port_ptr;
 typedef boost::shared_ptr<lidarScanner> lidarScannerPointer;
 
-#define SERIAL_PORT_READ_BUF_SIZE 30
+#define SERIAL_PORT_READ_BUF_SIZE 256
 
 class serialhandler
 {

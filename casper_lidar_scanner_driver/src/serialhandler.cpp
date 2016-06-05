@@ -146,6 +146,7 @@ void serialhandler::on_receive(const boost::system::error_code& ec, size_t bytes
     }    
     for(unsigned int i = 0; i < bytes_transferred; i++){
         char c = read_buf_raw[i];
+        printf("in for loop, in on_recieve()\n");
         printf("%c",c);
         if(c == end_of_line_char && c == '\r') {
             printf("got end of line\n");
