@@ -75,7 +75,8 @@ int lidarserver::startPolling(){
     while(this->polling){
         
         while(ros::ok())
-        {
+        {   
+            printf("main ros loop\n");
             sensor_msgs::LaserScan::Ptr scan(new sensor_msgs::LaserScan);
             scan->header.frame_id = frame_id;
             scan->header.stamp = ros::Time::now();
