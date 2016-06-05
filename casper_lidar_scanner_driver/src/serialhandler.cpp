@@ -50,7 +50,7 @@ bool serialhandler::start(const char * com_port_name, int baud_rate){
 
     return true;
 }
-void serialhandler:start_read(){
+void serialhandler::start_read(){
     printf("calling async_read()\n");
     async_read();
 
