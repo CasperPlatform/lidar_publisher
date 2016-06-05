@@ -47,13 +47,14 @@ bool serialhandler::start(const char * com_port_name, int baud_rate){
 
     boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
     
-
+    io_service.run();
+    async_read();
     return true;
 }
 void serialhandler::start_read(){
     printf("calling async_read()\n");
-    async_read();
-    io_service.run();
+   
+   
 
 }
 void serialhandler::stop()
