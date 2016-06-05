@@ -76,7 +76,7 @@ int lidarserver::startPolling(){
         
         while(ros::ok())
         {   
-            printf("main ros loop\n");
+            printf("start of main ros loop\n");
             sensor_msgs::LaserScan::Ptr scan(new sensor_msgs::LaserScan);
             scan->header.frame_id = frame_id;
             scan->header.stamp = ros::Time::now();
@@ -84,8 +84,10 @@ int lidarserver::startPolling(){
             rpms.data=lidar_scanner->rpms;
             laser_pub.publish(scan);
             motor_pub.publish(rpms);
+            printf("end of main ros loop\n");
         }
     }
+    printf("after main ros loop\n");
     this->lidar_scanner->close();
     return 0;
 }

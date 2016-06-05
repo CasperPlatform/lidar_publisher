@@ -26,7 +26,7 @@
 	}
 	
 	void lidarScanner::poll(sensor_msgs::LaserScan::Ptr scan) {
-		
+		printf("in poll method\n");
 		uint8_t points = 0;
 		bool scan_ready = false;
 		rpms = 0;
@@ -41,6 +41,7 @@
 
 		while (!this->shutting_down && !scan_ready) 
 		{
+			printf("in poll method while loop\n");
 		    //ROS_INFO( "Read Point: %d, %d, %f, %d" , scan_position, distance, degreesPerSecond, scan_time_ms );
 			if(scanRecieved)
 			{
