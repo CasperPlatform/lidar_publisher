@@ -15,6 +15,10 @@ serialhandler::~serialhandler(void)
 {
     stop();
 }
+
+void serialHandler::initialize(){
+    
+}
 char serialhandler::get_eol_char() const
 {
     return this->end_of_line_char;
@@ -45,7 +49,7 @@ bool serialhandler::start(const char * com_port_name, int baud_rate){
 
     port->set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 
-    //boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
+    boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
     
     
     async_read();
@@ -143,6 +147,7 @@ void serialhandler::on_receive(const boost::system::error_code& ec, size_t bytes
             printf("got end of line\n");
             this->on_received(read_buf_str);
             read_buf_str.clear();
+            async_read();
         }
         else
         {

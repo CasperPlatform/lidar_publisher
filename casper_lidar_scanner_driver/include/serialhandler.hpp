@@ -33,6 +33,7 @@ protected:
 
 	char end_of_line_char;
 	lidarScannerPointer lidar_scanner;
+	boost::thread service_thread;
 
 /*private:
 	SerialPort(const SerialPort &p);
@@ -51,7 +52,7 @@ public:
 	void start_read();
 	int write_string(const std::string &buf);
 	int write_bytes(const char *, const int &size);
-
+	void initialize();
 	//static int get_port_number();
 	//static std::string get_port_name(const unsigned int &idx);
 	//static std::vector<std::string> get_port_names();
