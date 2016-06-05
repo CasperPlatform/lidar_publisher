@@ -16,8 +16,8 @@ serialhandler::~serialhandler(void)
     stop();
 }
 
-void serialHandler::initialize(){
-    
+void serialhandler::initialize(){
+
 }
 char serialhandler::get_eol_char() const
 {
