@@ -122,7 +122,7 @@ void serialhandler::async_read()
 void serialhandler::on_receive(const boost::system::error_code& ec, size_t bytes_transferred)
 {
     boost::mutex::scoped_lock look(mutex);
-    
+    printf("on recieve()\n");
     if( port.get() == NULL || !port->is_open())
     {
         printf("error in on_receive\n");
