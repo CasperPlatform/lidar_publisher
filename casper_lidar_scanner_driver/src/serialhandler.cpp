@@ -12,7 +12,7 @@ serialhandler::serialhandler(lidarScanner* scanner,
 end_of_line_char('\n'), 
 com_port_name(com_port),
 baud_rate(baud),
-service_thread(std::bind(&sockethandler::initialize, this))
+service_thread(std::bind(&serialhandler::initialize, this))
 {   
 
     printf("serialHandler constructor\n");
