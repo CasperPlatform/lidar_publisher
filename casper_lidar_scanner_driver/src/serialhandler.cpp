@@ -7,7 +7,8 @@
 #include "lidarScanner.hpp"
 
 serialhandler::serialhandler(lidarScanner* scanner) : end_of_line_char('\n')
-{
+{   
+    printf("serialHandler constructor\n");
     this->lidar_scanner = lidarScannerPointer(scanner);
 }
 serialhandler::~serialhandler(void)
@@ -45,12 +46,15 @@ bool serialhandler::start(const char * com_port_name, int baud_rate){
     port->set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 
     boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
-
-    async_read();
+    
 
     return true;
 }
+void serialhandler:start_read(){
+    printf("calling async_read()\n");
+    async_read();
 
+}
 void serialhandler::stop()
 {
     boost::mutex::scoped_lock look(mutex);
@@ -107,7 +111,7 @@ void serialhandler::async_read()
         printf("async read error in async_read()\n");
         return;
     } 
-    
+    printf("in async_read()\n");
     port->async_read_some(
         boost::asio::buffer(read_buf_raw, SERIAL_PORT_READ_BUF_SIZE), 
         boost::bind(

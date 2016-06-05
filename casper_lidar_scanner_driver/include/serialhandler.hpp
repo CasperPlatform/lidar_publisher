@@ -47,7 +47,7 @@ public:
 
 	virtual bool start(const char *com_port_name, int baud_rate);
 	virtual void stop();
-
+	void start_read();
 	int write_string(const std::string &buf);
 	int write_bytes(const char *, const int &size);
 

@@ -10,7 +10,7 @@
 							   shutting_down(false)
 	{
 		printf("in lidarScanne Constructor\n");
-		serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
+		//serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 		this->serialHandler = serial_handler_ptr(new serialhandler(this));
     	this->serialHandler->start("/dev/ttyUSB0",115200);
 	}	
@@ -23,6 +23,7 @@
 		
 		this->serialHandler->write_bytes(buf,2);
 		printf("sent LS to lidar\n");
+		this->serialHandler->start_read();
 	}
 	
 	void lidarScanner::poll(sensor_msgs::LaserScan::Ptr scan) {
