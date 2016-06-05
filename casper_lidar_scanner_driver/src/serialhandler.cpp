@@ -153,12 +153,14 @@ void serialhandler::on_receive(const boost::system::error_code& ec, size_t bytes
             this->on_received(read_buf_str);
             read_buf_str.clear();
             async_read();
+            return;
         }
         else
         {
             read_buf_str += c;
         }
     }
+    async_read();
 }
 void serialhandler::on_received(const std::string & data){
     printf("updatescan in serialhandler\n");
