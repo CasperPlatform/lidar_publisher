@@ -25,7 +25,7 @@ class serialhandler
 {
 protected:
 	boost::asio::io_service io_service;
-	serial_port_ptr port;
+	
 	boost::mutex mutex;
 
 	char read_buf_raw[SERIAL_PORT_READ_BUF_SIZE];
@@ -39,6 +39,7 @@ protected:
 	SerialPort &operator=(const SerialPort &p); 
 */
 public:
+	serial_port_ptr port;
 	serialhandler(lidarScanner* scanner);
 	virtual ~serialhandler(void);
 	
