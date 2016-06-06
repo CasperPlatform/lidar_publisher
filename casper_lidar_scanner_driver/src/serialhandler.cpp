@@ -132,7 +132,7 @@ void serialhandler::sync_read(){
     float degrees;
     double scan_time;
 
-    boost::asio::read(port, boost::asio::buffer(&start_char,1));
+    boost::asio::read(*port, boost::asio::buffer(&start_char,1));
     if(start_char == 0x10){
         printf("found start char\n");
         boost::asio::read(port, boost::asio::buffer(&angle,8));
