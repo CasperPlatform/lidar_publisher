@@ -136,10 +136,12 @@ void serialhandler::sync_read(){
     if(start_char == 0x10){
         printf("found start char\n");
         int count = 0;
-        while(temp_char != 0x10){
+
+        do {
             boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
             count++;
-        }
+        } while(temp_char != 0x10);
+
         printf("count is: %d\n",count);
         // boost::asio::read(*port, boost::asio::buffer(&angle,8));
         // boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
