@@ -68,7 +68,7 @@ int lidarserver::startPolling(){
     priv_nh.param("port", this->port, this->port);
     priv_nh.param("baud_rate", this->baud_rate, this->baud_rate);
     priv_nh.param("frame_id", this->frame_id, std::string("lidar_scanner"));
-    printf("%s\n",frame_id);
+    printf("%s\n", frame_id.c_str());
     ros::Publisher laser_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1000);
     ros::Publisher motor_pub = nh.advertise<std_msgs::UInt16>("rpms",1000);
     std_msgs::UInt16 rpms;
