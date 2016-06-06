@@ -131,9 +131,22 @@ void serialhandler::sync_read(){
     uint16_t distance;
     float degrees;
     double scan_time;
-
+    int count = 0;
     boost::asio::read(*port, boost::asio::buffer(&start_char,1));
+    
     if(start_char == 0x10){
+        count++;
+        boost::asio::read(*port, boost::asio::buffer(&start_char,1));
+        if(start_char == 0x2D){
+            count++;
+            boost::asio::read(*port, boost::asio::buffer(&start_char,1));
+            if(start_char == 0x70){
+                count++;
+            }
+        }
+    }
+    if( count == 3){    
+        count = 0;
         printf("found start char\n");
         // int count = 0;
 
@@ -144,7 +157,7 @@ void serialhandler::sync_read(){
         // } while(temp_char != 0x10);
 
         // printf("count is: %d\n",count);
-        
+
         boost::asio::read(*port, boost::asio::buffer(&angle,8));
         boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
         boost::asio::read(*port, boost::asio::buffer(&distance,2));
@@ -153,7 +166,7 @@ void serialhandler::sync_read(){
         boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
         boost::asio::read(*port, boost::asio::buffer(&scan_time,8));
         boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
-        
+        0x0A, 0x2D, 0x70
         if(temp_char == '\n'){
             printf("got complete message\n");
             
@@ -167,7 +180,7 @@ void serialhandler::sync_read(){
         }
     }
     else{
-        printf("got wrong start char\n");
+        printf("got wrong start sequence\n");
     }
 
 }
