@@ -61,14 +61,14 @@ int lidarserver::startPolling(){
 
     lidar_scanner->startLidar();
 
-    ros::init(this->argc, this->argv, "lidar_scanner_publisher");
+    ros::init(this->argc, this->argv, "casper_lidar_scanner_driver");
     ROS_INFO_STREAM("Lidar Scanner Publisher");
     ros::NodeHandle nh;
     ros::NodeHandle priv_nh("~");
     priv_nh.param("port", this->port, this->port);
     priv_nh.param("baud_rate", this->baud_rate, this->baud_rate);
-    nh.param("frame_id", this->frame_id, std::string("lidar_scanner"));
-
+    priv_nh.param("frame_id", this->frame_id, std::string("lidar_scanner"));
+    printf("%s\n",frame_id);
     ros::Publisher laser_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1000);
     ros::Publisher motor_pub = nh.advertise<std_msgs::UInt16>("rpms",1000);
     std_msgs::UInt16 rpms;
@@ -78,7 +78,7 @@ int lidarserver::startPolling(){
         {   
             printf("start of main ros loop\n");
             sensor_msgs::LaserScan::Ptr scan(new sensor_msgs::LaserScan);
-            scan->header.frame_id = frame_id;
+            scan->header.frame_id = "lidar_scanner";
             scan->header.stamp = ros::Time::now();
             lidar_scanner->poll(scan);
             rpms.data=lidar_scanner->rpms;
