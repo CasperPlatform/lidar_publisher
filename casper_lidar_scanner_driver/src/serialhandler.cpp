@@ -135,25 +135,31 @@ void serialhandler::sync_read(){
     boost::asio::read(*port, boost::asio::buffer(&start_char,1));
     if(start_char == 0x10){
         printf("found start char\n");
-        boost::asio::read(*port, boost::asio::buffer(&angle,8));
-        boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
-        boost::asio::read(*port, boost::asio::buffer(&distance,2));
-        boost::asio::read(*port, boost::asio::buffer(&temp_char,1));        
-        boost::asio::read(*port, boost::asio::buffer(&degrees,4));
-        boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
-        boost::asio::read(*port, boost::asio::buffer(&scan_time,8));
-        boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
-        if(temp_char == 0x0A){
-            printf("got complete message\n");
+        int count = 0;
+        while(boost::asio::read(*port, boost::asio::buffer(&temp_char,1)) != 0x10){
+            count++;
+        }
+        printf("count is: %d\n",count);
+        // boost::asio::read(*port, boost::asio::buffer(&angle,8));
+        // boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
+        // boost::asio::read(*port, boost::asio::buffer(&distance,2));
+        // boost::asio::read(*port, boost::asio::buffer(&temp_char,1));        
+        // boost::asio::read(*port, boost::asio::buffer(&degrees,4));
+        // boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
+        // boost::asio::read(*port, boost::asio::buffer(&scan_time,8));
+        // boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
+        
+        // if(temp_char == '\n'){
+        //     printf("got complete message\n");
             
-            printf("angle: %f\n",angle);
-            printf("distance: %d\n", distance);
-            printf("degrees/s: %f\n", degrees);
-            printf("scan_time_ms: %f\n", scan_time);
-        }
-        else{
-            printf("wrong end char\n");
-        }
+        //     printf("angle: %f\n",angle);
+        //     printf("distance: %d\n", distance);
+        //     printf("degrees/s: %f\n", degrees);
+        //     printf("scan_time_ms: %f\n", scan_time);
+        // }
+        // else{
+        //     printf("wrong end char\n");
+        // }
     }
     else{
         printf("got wrong start char\n");
