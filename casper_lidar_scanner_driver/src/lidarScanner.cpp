@@ -84,5 +84,11 @@
 		response_stream >> dummy;
 		response_stream >> scan_time_ms;
 		
+		printf("scan_position: %d\n",scan_position);
+		printf("distance: %d\n", distance);
+		printf("degrees/s: %f\n", degreesPerSecond);
+		printf("scan_time_ms: %d\n", scan_time_ms);
+
+
 		scanRecieved = true;
 	}
