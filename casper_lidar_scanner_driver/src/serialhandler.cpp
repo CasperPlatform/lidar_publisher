@@ -166,6 +166,6 @@ void serialhandler::on_receive(const boost::system::error_code& ec, size_t bytes
 }
 void serialhandler::on_received(const std::string & data){
     printf("updatescan in serialhandler\n");
-    printf("data from serial: %s\n", data);
+    printf("data from serial: %s\n", data.c_str());
     this->lidar_scanner->updateScan(data);
 }
