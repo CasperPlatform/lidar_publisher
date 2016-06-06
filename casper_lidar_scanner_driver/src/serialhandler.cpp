@@ -139,6 +139,7 @@ void serialhandler::sync_read(){
 
         do {
             boost::asio::read(*port, boost::asio::buffer(&temp_char,1));
+            printf("char : %d\n",(uint8_t)temp_char);
             count++;
         } while(temp_char != 0x10);
 
