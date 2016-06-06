@@ -35,7 +35,7 @@ class lidarScanner
 		int scan_position;
 		int distance;
 		double degreesPerSecond;
-		double scan_time_ms;
+		int scan_time_ms;
 		char dummy;
 		bool scanRecieved;
 };
