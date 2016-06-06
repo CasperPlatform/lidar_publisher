@@ -57,12 +57,14 @@ bool serialhandler::start(const char * com_port_name, int baud_rate){
     }
 
     port->set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
-    port->set_option( boost::asio::serial_port_base::flow_control( asio_serial::flow_control::none ) );
-    port->set_option( boost::asio::serial_port_base::parity( asio_serial::parity::none ) );
-    port->set_option( boost::asio::serial_port_base::stop_bits( asio_serial::stop_bits::one ) );
+    port->set_option( boost::asio::serial_port_base::flow_control( boost::asio::serial_port_base::flow_control::none ) );
+    port->set_option( boost::asio::serial_port_base::parity( boost::asio::serial_port_base::parity::none ) );
+    port->set_option( boost::asio::serial_port_base::stop_bits( boost::asio::serial_port_base::stop_bits::one ) );
     // port.set_option( asio_serial::character_size( 8 ) );
 
     return true;
+
+    
 }
 void serialhandler::start_read(){
     //printf("calling async_read()\n");
