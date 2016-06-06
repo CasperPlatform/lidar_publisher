@@ -56,6 +56,7 @@ public:
 	int write_string(const std::string &buf);
 	int write_bytes(const char *, const int &size);
 	void initialize();
+	void sync_read();
 	//static int get_port_number();
 	//static std::string get_port_name(const unsigned int &idx);
 	//static std::vector<std::string> get_port_names();

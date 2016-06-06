@@ -25,8 +25,8 @@ serialhandler::~serialhandler(void)
 
 void serialhandler::initialize(){
     this->start(this->com_port_name,this->baud_rate);
-    async_read();
-    io_service.run();
+    // async_read();
+    // io_service.run();
 }
 char serialhandler::get_eol_char() const
 {
@@ -64,7 +64,7 @@ bool serialhandler::start(const char * com_port_name, int baud_rate){
 
     return true;
 
-    
+
 }
 void serialhandler::start_read(){
     //printf("calling async_read()\n");
@@ -120,6 +120,45 @@ int serialhandler::write_bytes(const char * buf, const int &size)
         return result;
     }
    
+}
+
+void serialhandler::sync_read(){
+
+    uint8_t start_char;
+    uint8_t temp_char;
+
+    double angle;
+    uint16_t distance;
+    float degrees;
+    double scan_time;
+
+    boost::asio::read(port, boost::asio::buffer(&start_char,1));
+    if(start_char == 0x10){
+        printf("found start char\n");
+        boost::asio::read(port, boost::asio::buffer(&angle,8));
+        boost::asio::read(port, boost::asio::buffer(&temp_char,1));
+        boost::asio::read(port, boost::asio::buffer(&distance,2));
+        boost::asio::read(port, boost::asio::buffer(&temp_char,1));        
+        boost::asio::read(port, boost::asio::buffer(&degrees,4));
+        boost::asio::read(port, boost::asio::buffer(&temp_char,1));
+        boost::asio::read(port, boost::asio::buffer(&scan_time,8));
+        boost::asio::read(port, boost::asio::buffer(&temp_char,1));
+        if(temp_char == 0x0A){
+            printf("got complete message\n");
+            
+            printf("angle: %f\n",angle);
+            printf("distance: %d\n", distance);
+            printf("degrees/s: %f\n", degrees);
+            printf("scan_time_ms: %f\n", scan_time);
+        }
+        else{
+            printf("wrong end char\n");
+        }
+    }
+    else{
+        printf("got wrong start char\n");
+    }
+
 }
 
 void serialhandler::async_read()

@@ -43,7 +43,7 @@
 		while (!this->shutting_down && !scan_ready) 
 		{	
 
-
+			this->serialhandler->sync_read();
 			//printf("in poll method while loop\n");
 		    //ROS_INFO( "Read Point: %d, %d, %f, %d" , scan_position, distance, degreesPerSecond, scan_time_ms );
 			if(scanRecieved)
